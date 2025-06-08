@@ -1,0 +1,5042 @@
+2025-06-08 11:24:02 [main] INFO  com.sportsdata.etl.Application - Starting Application using Java 23.0.2 with PID 25106 (/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes started by lengocthinh in /Users/lengocthinh/Documents/repositories/etl-pipeline-with-java)
+2025-06-08 11:24:02 [main] INFO  com.sportsdata.etl.Application - No active profile set, falling back to 1 default profile: "default"
+2025-06-08 11:24:02 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 11:24:02 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-06-08 11:24:02 [main] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-06-08 11:24:03 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 11:24:03 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:sportsdb user=SA
+2025-06-08 11:24:03 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 11:24:03 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-08 11:24:03 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 11:24:03 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 11:24:03 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 11:24:03 [main] DEBUG org.hibernate.SQL - 
+    create table games (
+        away_score integer,
+        home_score integer,
+        date timestamp(6) not null,
+        away_team_id varchar(255) not null,
+        game_id varchar(255) not null,
+        home_team_id varchar(255) not null,
+        status varchar(255) not null,
+        primary key (game_id)
+    )
+2025-06-08 11:24:03 [main] DEBUG org.hibernate.SQL - 
+    create table players (
+        age integer not null,
+        assists integer,
+        games_played integer,
+        points integer,
+        name varchar(255) not null,
+        player_id varchar(255) not null,
+        position varchar(255) not null,
+        team_id varchar(255) not null,
+        primary key (player_id)
+    )
+2025-06-08 11:24:03 [main] DEBUG org.hibernate.SQL - 
+    create table teams (
+        founded date,
+        city varchar(255) not null,
+        league varchar(255) not null,
+        name varchar(255) not null,
+        team_id varchar(255) not null,
+        venue varchar(255),
+        primary key (team_id)
+    )
+2025-06-08 11:24:04 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'etlController': Unsatisfied dependency expressed through field 'etlPipeline': Error creating bean with name 'etlPipeline': Unsatisfied dependency expressed through field 'metricsCollector': Error creating bean with name 'metricsCollector' defined in file [/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes/com/sportsdata/etl/utils/MetricsCollector.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'io.micrometer.core.instrument.MeterRegistry' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-06-08 11:24:04 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 11:24:04 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 11:24:04 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 11:24:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 11:24:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 11:24:04 [main] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2025-06-08 11:24:04 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.sportsdata.etl.utils.MetricsCollector required a bean of type 'io.micrometer.core.instrument.MeterRegistry' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'io.micrometer.core.instrument.MeterRegistry' in your configuration.
+
+2025-06-08 11:25:36 [main] INFO  com.sportsdata.etl.Application - Starting Application using Java 23.0.2 with PID 25599 (/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes started by lengocthinh in /Users/lengocthinh/Documents/repositories/etl-pipeline-with-java)
+2025-06-08 11:25:36 [main] INFO  com.sportsdata.etl.Application - No active profile set, falling back to 1 default profile: "default"
+2025-06-08 11:25:37 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 11:25:37 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-06-08 11:25:37 [main] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-06-08 11:25:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 11:25:37 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:sportsdb user=SA
+2025-06-08 11:25:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 11:25:37 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-08 11:25:38 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 11:25:38 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 11:25:38 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 11:25:38 [main] DEBUG org.hibernate.SQL - 
+    create table games (
+        away_score integer,
+        home_score integer,
+        date timestamp(6) not null,
+        away_team_id varchar(255) not null,
+        game_id varchar(255) not null,
+        home_team_id varchar(255) not null,
+        status varchar(255) not null,
+        primary key (game_id)
+    )
+2025-06-08 11:25:38 [main] DEBUG org.hibernate.SQL - 
+    create table players (
+        age integer not null,
+        assists integer,
+        games_played integer,
+        points integer,
+        name varchar(255) not null,
+        player_id varchar(255) not null,
+        position varchar(255) not null,
+        team_id varchar(255) not null,
+        primary key (player_id)
+    )
+2025-06-08 11:25:38 [main] DEBUG org.hibernate.SQL - 
+    create table teams (
+        founded date,
+        city varchar(255) not null,
+        league varchar(255) not null,
+        name varchar(255) not null,
+        team_id varchar(255) not null,
+        venue varchar(255),
+        primary key (team_id)
+    )
+2025-06-08 11:25:38 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-08 11:25:38 [main] INFO  com.sportsdata.etl.Application - Started Application in 2.415 seconds (process running for 2.613)
+2025-06-08 11:28:00 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 11:28:00 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 11:28:00 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 11:28:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 11:28:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 11:28:08 [main] INFO  com.sportsdata.etl.Application - Starting Application using Java 23.0.2 with PID 25817 (/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes started by lengocthinh in /Users/lengocthinh/Documents/repositories/etl-pipeline-with-java)
+2025-06-08 11:28:08 [main] INFO  com.sportsdata.etl.Application - No active profile set, falling back to 1 default profile: "default"
+2025-06-08 11:28:08 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 11:28:08 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-06-08 11:28:08 [main] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-06-08 11:28:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 11:28:09 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:sportsdb user=SA
+2025-06-08 11:28:09 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 11:28:09 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-08 11:28:09 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 11:28:09 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 11:28:09 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 11:28:09 [main] DEBUG org.hibernate.SQL - 
+    create table games (
+        away_score integer,
+        home_score integer,
+        date timestamp(6) not null,
+        away_team_id varchar(255) not null,
+        game_id varchar(255) not null,
+        home_team_id varchar(255) not null,
+        status varchar(255) not null,
+        primary key (game_id)
+    )
+2025-06-08 11:28:09 [main] DEBUG org.hibernate.SQL - 
+    create table players (
+        age integer not null,
+        assists integer,
+        games_played integer,
+        points integer,
+        name varchar(255) not null,
+        player_id varchar(255) not null,
+        position varchar(255) not null,
+        team_id varchar(255) not null,
+        primary key (player_id)
+    )
+2025-06-08 11:28:09 [main] DEBUG org.hibernate.SQL - 
+    create table teams (
+        founded date,
+        city varchar(255) not null,
+        league varchar(255) not null,
+        name varchar(255) not null,
+        team_id varchar(255) not null,
+        venue varchar(255),
+        primary key (team_id)
+    )
+2025-06-08 11:28:09 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-08 11:28:10 [main] INFO  com.sportsdata.etl.Application - Started Application in 2.183 seconds (process running for 2.349)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.controllers.EtlController - ETL pipeline execution requested via REST API
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Starting ETL pipeline execution - Pipeline ID: b499a767-463c-48b4-850e-7daf547d4406
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 1: Starting data extraction
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracting teams from CSV: src/main/resources/sample-data/teams.csv
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.CsvDataExtractor - Processing CSV file: src/main/resources/sample-data/teams.csv with headers: teamId, name, city, league, founded, venue
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.CsvDataExtractor - Successfully extracted 15 teams from CSV file: src/main/resources/sample-data/teams.csv
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 teams from CSV
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracting players from JSON: src/main/resources/sample-data/players.json
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.JsonApiExtractor - Processing JSON file: src/main/resources/sample-data/players.json
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.JsonApiExtractor - Successfully extracted 15 players from JSON file: src/main/resources/sample-data/players.json
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 players from JSON
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracting games from XML: src/main/resources/sample-data/games.xml
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.XmlFeedExtractor - Processing XML file: src/main/resources/sample-data/games.xml
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.XmlFeedExtractor - Successfully extracted 12 games from XML file: src/main/resources/sample-data/games.xml
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 12 games from XML
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 2: Starting data transformation and validation
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 teams
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 teams
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Team validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 teams
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Team cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 teams
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Team standardization completed: 15 teams processed
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Processed teams: 15 -> 15 valid
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 players
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 players
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Player validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 players
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Player cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 players
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Player standardization completed: 15 players processed
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Processed players: 15 -> 15 valid
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 12 games
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Starting validation of 12 games
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Game validation completed: 12 valid, 0 errors, 0 warnings
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 12 games
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Game cleaning completed: 12 cleaned, 0 duplicates removed
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 12 games
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Game standardization completed: 12 games processed
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Processed games: 12 -> 12 valid
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 3: Starting data loading
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Starting database loading process
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 teams into database
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 teams
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 players into database
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 players
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Loading 12 games into database
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 12 games
+2025-06-08 11:29:04 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Database loading completed successfully: 15 teams, 15 players, 12 games
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:04 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 11:29:05 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 4: Running data quality assessment
+2025-06-08 11:29:05 [http-nio-8080-exec-2] INFO  c.s.etl.quality.DataQualityChecker - Generating data quality report
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 11:29:05 [http-nio-8080-exec-2] INFO  c.s.etl.quality.DataQualityChecker - Data quality report generated: 15 teams, 15 players, 12 games, Overall Score: {:.2f} (0.9)
+2025-06-08 11:29:05 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - ETL pipeline completed successfully - Pipeline ID: b499a767-463c-48b4-850e-7daf547d4406, Duration: 224 ms
+2025-06-08 11:29:05 [http-nio-8080-exec-2] INFO  c.s.etl.controllers.EtlController - ETL pipeline completed successfully via REST API: b499a767-463c-48b4-850e-7daf547d4406
+2025-06-08 11:29:23 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2025-06-08 11:29:27 [http-nio-8080-exec-4] INFO  c.s.etl.controllers.EtlController - Data quality report requested via REST API
+2025-06-08 11:29:27 [http-nio-8080-exec-4] INFO  c.s.etl.quality.DataQualityChecker - Generating data quality report
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 11:29:27 [http-nio-8080-exec-4] INFO  c.s.etl.quality.DataQualityChecker - Data quality report generated: 15 teams, 15 players, 12 games, Overall Score: {:.2f} (0.9)
+2025-06-08 11:29:40 [http-nio-8080-exec-5] INFO  c.s.etl.controllers.EtlController - Pipeline status requested via REST API
+2025-06-08 11:29:40 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 11:29:40 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 11:29:40 [http-nio-8080-exec-5] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 11:44:36 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s614ms).
+2025-06-08 12:00:56 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m49s48ms).
+2025-06-08 12:14:54 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m58s929ms).
+2025-06-08 12:30:24 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s965ms).
+2025-06-08 12:46:58 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m4s658ms).
+2025-06-08 13:32:40 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m41s704ms).
+2025-06-08 13:44:09 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s749ms).
+2025-06-08 13:52:52 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m13s169ms).
+2025-06-08 14:10:43 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m49s813ms).
+2025-06-08 14:27:26 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m13s474ms).
+2025-06-08 14:31:09 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m12s64ms).
+2025-06-08 14:46:03 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m54s965ms).
+2025-06-08 14:51:08 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m34s431ms).
+2025-06-08 14:55:54 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 14:55:54 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 14:55:54 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 14:55:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 14:55:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 14:56:05 [main] INFO  com.sportsdata.etl.Application - Starting Application using Java 23.0.2 with PID 35056 (/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes started by lengocthinh in /Users/lengocthinh/Documents/repositories/etl-pipeline-with-java)
+2025-06-08 14:56:05 [main] INFO  com.sportsdata.etl.Application - No active profile set, falling back to 1 default profile: "default"
+2025-06-08 14:56:06 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 14:56:06 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-06-08 14:56:06 [main] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-06-08 14:56:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 14:56:06 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:sportsdb user=SA
+2025-06-08 14:56:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 14:56:06 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-08 14:56:07 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 14:56:07 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 14:56:07 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 14:56:07 [main] DEBUG org.hibernate.SQL - 
+    create table games (
+        away_score integer,
+        home_score integer,
+        date timestamp(6) not null,
+        away_team_id varchar(255) not null,
+        game_id varchar(255) not null,
+        home_team_id varchar(255) not null,
+        status varchar(255) not null,
+        primary key (game_id)
+    )
+2025-06-08 14:56:07 [main] DEBUG org.hibernate.SQL - 
+    create table players (
+        age integer not null,
+        assists integer,
+        games_played integer,
+        points integer,
+        name varchar(255) not null,
+        player_id varchar(255) not null,
+        position varchar(255) not null,
+        team_id varchar(255) not null,
+        primary key (player_id)
+    )
+2025-06-08 14:56:07 [main] DEBUG org.hibernate.SQL - 
+    create table teams (
+        founded date,
+        city varchar(255) not null,
+        league varchar(255) not null,
+        name varchar(255) not null,
+        team_id varchar(255) not null,
+        venue varchar(255),
+        primary key (team_id)
+    )
+2025-06-08 14:56:07 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-08 14:56:07 [main] INFO  com.sportsdata.etl.Application - Started Application in 2.927 seconds (process running for 3.113)
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.controllers.EtlController - ETL pipeline execution requested via REST API
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Starting ETL pipeline execution - Pipeline ID: 484ef962-c2f2-4f7c-a5a3-ceba4391aa62
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Phase 1: Starting data extraction
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Extracting teams from CSV: src/main/resources/sample-data/teams.csv
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.extractors.CsvDataExtractor - Processing CSV file: src/main/resources/sample-data/teams.csv with headers: teamId, name, city, league, founded, venue
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.extractors.CsvDataExtractor - Successfully extracted 15 teams from CSV file: src/main/resources/sample-data/teams.csv
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 teams from CSV
+2025-06-08 14:57:26 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Extracting players from JSON: src/main/resources/sample-data/players.json
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.extractors.JsonApiExtractor - Processing JSON file: src/main/resources/sample-data/players.json
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.extractors.JsonApiExtractor - Successfully extracted 15 players from JSON file: src/main/resources/sample-data/players.json
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 players from JSON
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Extracting games from XML: src/main/resources/sample-data/games.xml
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.extractors.XmlFeedExtractor - Processing XML file: src/main/resources/sample-data/games.xml
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.extractors.XmlFeedExtractor - Successfully extracted 12 games from XML file: src/main/resources/sample-data/games.xml
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 12 games from XML
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Phase 2: Starting data transformation and validation
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 teams
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 teams
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataValidator - Team validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 teams
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataCleaner - Team cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 teams
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.e.transformers.DataStandardizer - Team standardization completed: 15 teams processed
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Processed teams: 15 -> 15 valid
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 players
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 players
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataValidator - Player validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 players
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataCleaner - Player cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 players
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.e.transformers.DataStandardizer - Player standardization completed: 15 players processed
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Processed players: 15 -> 15 valid
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 12 games
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataValidator - Starting validation of 12 games
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataValidator - Game validation completed: 12 valid, 0 errors, 0 warnings
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 12 games
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.transformers.DataCleaner - Game cleaning completed: 12 cleaned, 0 duplicates removed
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 12 games
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.e.transformers.DataStandardizer - Game standardization completed: 12 games processed
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Processed games: 12 -> 12 valid
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Phase 3: Starting data loading
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Starting database loading process
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 teams into database
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 teams
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 players into database
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 players
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Loading 12 games into database
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 12 games
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.loaders.DatabaseLoader - Database loading completed successfully: 15 teams, 15 players, 12 games
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - Phase 4: Running data quality assessment
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.quality.DataQualityChecker - Generating data quality report
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.quality.DataQualityChecker - Data quality report generated: 15 teams, 15 players, 12 games, Overall Score: {:.2f} (0.9)
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.pipeline.EtlPipeline - ETL pipeline completed successfully - Pipeline ID: 484ef962-c2f2-4f7c-a5a3-ceba4391aa62, Duration: 323 ms
+2025-06-08 14:57:27 [http-nio-8080-exec-1] INFO  c.s.etl.controllers.EtlController - ETL pipeline completed successfully via REST API: 484ef962-c2f2-4f7c-a5a3-ceba4391aa62
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.controllers.EtlController - ETL pipeline execution requested via REST API
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Starting ETL pipeline execution - Pipeline ID: 9e98af02-d212-4395-a274-9e10765230a4
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Phase 1: Starting data extraction
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Extracting teams from CSV: src/main/resources/sample-data/teams.csv
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.extractors.CsvDataExtractor - Processing CSV file: src/main/resources/sample-data/teams.csv with headers: teamId, name, city, league, founded, venue
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.extractors.CsvDataExtractor - Successfully extracted 15 teams from CSV file: src/main/resources/sample-data/teams.csv
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 teams from CSV
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Extracting players from JSON: src/main/resources/sample-data/players.json
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.extractors.JsonApiExtractor - Processing JSON file: src/main/resources/sample-data/players.json
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.extractors.JsonApiExtractor - Successfully extracted 15 players from JSON file: src/main/resources/sample-data/players.json
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 players from JSON
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Extracting games from XML: src/main/resources/sample-data/games.xml
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.extractors.XmlFeedExtractor - Processing XML file: src/main/resources/sample-data/games.xml
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.extractors.XmlFeedExtractor - Successfully extracted 12 games from XML file: src/main/resources/sample-data/games.xml
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 12 games from XML
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Phase 2: Starting data transformation and validation
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 teams
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 teams
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataValidator - Team validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 14:59:53 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 teams
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataCleaner - Team cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 teams
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.e.transformers.DataStandardizer - Team standardization completed: 15 teams processed
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Processed teams: 15 -> 15 valid
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 players
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 players
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataValidator - Player validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 players
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataCleaner - Player cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 players
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.e.transformers.DataStandardizer - Player standardization completed: 15 players processed
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Processed players: 15 -> 15 valid
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 12 games
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataValidator - Starting validation of 12 games
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataValidator - Game validation completed: 12 valid, 0 errors, 0 warnings
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 12 games
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.transformers.DataCleaner - Game cleaning completed: 12 cleaned, 0 duplicates removed
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 12 games
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.e.transformers.DataStandardizer - Game standardization completed: 12 games processed
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Processed games: 12 -> 12 valid
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Phase 3: Starting data loading
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Starting database loading process
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 teams into database
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 teams
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 players into database
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 players
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Loading 12 games into database
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 12 games
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.loaders.DatabaseLoader - Database loading completed successfully: 15 teams, 15 players, 12 games
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - Phase 4: Running data quality assessment
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.quality.DataQualityChecker - Generating data quality report
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.quality.DataQualityChecker - Data quality report generated: 15 teams, 15 players, 12 games, Overall Score: {:.2f} (0.9)
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.pipeline.EtlPipeline - ETL pipeline completed successfully - Pipeline ID: 9e98af02-d212-4395-a274-9e10765230a4, Duration: 110 ms
+2025-06-08 14:59:54 [http-nio-8080-exec-4] INFO  c.s.etl.controllers.EtlController - ETL pipeline completed successfully via REST API: 9e98af02-d212-4395-a274-9e10765230a4
+2025-06-08 15:01:47 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 15:01:47 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 15:01:47 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 15:01:47 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 15:01:47 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 15:01:52 [main] INFO  com.sportsdata.etl.Application - Starting Application using Java 23.0.2 with PID 35543 (/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes started by lengocthinh in /Users/lengocthinh/Documents/repositories/etl-pipeline-with-java)
+2025-06-08 15:01:52 [main] INFO  com.sportsdata.etl.Application - No active profile set, falling back to 1 default profile: "default"
+2025-06-08 15:01:53 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 15:01:53 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-06-08 15:01:53 [main] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-06-08 15:01:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 15:01:53 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:sportsdb user=SA
+2025-06-08 15:01:53 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 15:01:53 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-08 15:01:54 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 15:01:54 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 15:01:54 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 15:01:54 [main] DEBUG org.hibernate.SQL - 
+    create table games (
+        away_score integer,
+        home_score integer,
+        date timestamp(6) not null,
+        away_team_id varchar(255) not null,
+        game_id varchar(255) not null,
+        home_team_id varchar(255) not null,
+        status varchar(255) not null,
+        primary key (game_id)
+    )
+2025-06-08 15:01:54 [main] DEBUG org.hibernate.SQL - 
+    create table players (
+        age integer not null,
+        assists integer,
+        games_played integer,
+        points integer,
+        name varchar(255) not null,
+        player_id varchar(255) not null,
+        position varchar(255) not null,
+        team_id varchar(255) not null,
+        primary key (player_id)
+    )
+2025-06-08 15:01:54 [main] DEBUG org.hibernate.SQL - 
+    create table teams (
+        founded date,
+        city varchar(255) not null,
+        league varchar(255) not null,
+        name varchar(255) not null,
+        team_id varchar(255) not null,
+        venue varchar(255),
+        primary key (team_id)
+    )
+2025-06-08 15:01:54 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-08 15:01:55 [main] INFO  com.sportsdata.etl.Application - Started Application in 2.378 seconds (process running for 2.564)
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.controllers.EtlController - ETL pipeline execution requested via REST API
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Starting ETL pipeline execution - Pipeline ID: ba3538fe-09ad-47d0-868a-8bee1431d300
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 1: Starting data extraction
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracting teams from CSV: src/main/resources/sample-data/teams.csv
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.CsvDataExtractor - Processing CSV file: src/main/resources/sample-data/teams.csv with headers: teamId, name, city, league, founded, venue
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.CsvDataExtractor - Successfully extracted 15 teams from CSV file: src/main/resources/sample-data/teams.csv
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 teams from CSV
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracting players from JSON: src/main/resources/sample-data/players.json
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.JsonApiExtractor - Processing JSON file: src/main/resources/sample-data/players.json
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.JsonApiExtractor - Successfully extracted 15 players from JSON file: src/main/resources/sample-data/players.json
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 players from JSON
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracting games from XML: src/main/resources/sample-data/games.xml
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.XmlFeedExtractor - Processing XML file: src/main/resources/sample-data/games.xml
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.extractors.XmlFeedExtractor - Successfully extracted 12 games from XML file: src/main/resources/sample-data/games.xml
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 12 games from XML
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 2: Starting data transformation and validation
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 teams
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 teams
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Team validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 teams
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Team cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 teams
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Team standardization completed: 15 teams processed
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Processed teams: 15 -> 15 valid
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 players
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 players
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Player validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 players
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Player cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 players
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Player standardization completed: 15 players processed
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Processed players: 15 -> 15 valid
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 12 games
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Starting validation of 12 games
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataValidator - Game validation completed: 12 valid, 0 errors, 0 warnings
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 12 games
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.transformers.DataCleaner - Game cleaning completed: 12 cleaned, 0 duplicates removed
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 12 games
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.e.transformers.DataStandardizer - Game standardization completed: 12 games processed
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Processed games: 12 -> 12 valid
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 3: Starting data loading
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Starting database loading process
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 teams into database
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 teams
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 players into database
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 players
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Loading 12 games into database
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 12 games
+2025-06-08 15:02:35 [http-nio-8080-exec-2] INFO  c.s.etl.loaders.DatabaseLoader - Database loading completed successfully: 15 teams, 15 players, 12 games
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - Phase 4: Running data quality assessment
+2025-06-08 15:02:36 [http-nio-8080-exec-2] INFO  c.s.etl.quality.DataQualityChecker - Generating data quality report
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 15:02:36 [http-nio-8080-exec-2] INFO  c.s.etl.quality.DataQualityChecker - Data quality report generated: 15 teams, 15 players, 12 games, Overall Score: {:.2f} (0.9)
+2025-06-08 15:02:36 [http-nio-8080-exec-2] INFO  c.s.etl.pipeline.EtlPipeline - ETL pipeline completed successfully - Pipeline ID: ba3538fe-09ad-47d0-868a-8bee1431d300, Duration: 279 ms
+2025-06-08 15:02:36 [http-nio-8080-exec-2] INFO  c.s.etl.controllers.EtlController - ETL pipeline completed successfully via REST API: ba3538fe-09ad-47d0-868a-8bee1431d300
+2025-06-08 15:04:52 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 15:04:52 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 15:04:52 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 15:04:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 15:04:52 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 15:05:00 [main] INFO  com.sportsdata.etl.Application - Starting Application using Java 23.0.2 with PID 35826 (/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes started by lengocthinh in /Users/lengocthinh/Documents/repositories/etl-pipeline-with-java)
+2025-06-08 15:05:00 [main] INFO  com.sportsdata.etl.Application - No active profile set, falling back to 1 default profile: "default"
+2025-06-08 15:05:00 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 15:05:00 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-06-08 15:05:00 [main] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-06-08 15:05:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 15:05:01 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:sportsdb user=SA
+2025-06-08 15:05:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 15:05:01 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-08 15:05:01 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 15:05:01 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 15:05:01 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 15:05:01 [main] DEBUG org.hibernate.SQL - 
+    create table games (
+        away_score integer,
+        home_score integer,
+        date timestamp(6) not null,
+        away_team_id varchar(255) not null,
+        game_id varchar(255) not null,
+        home_team_id varchar(255) not null,
+        status varchar(255) not null,
+        primary key (game_id)
+    )
+2025-06-08 15:05:01 [main] DEBUG org.hibernate.SQL - 
+    create table players (
+        age integer not null,
+        assists integer,
+        games_played integer,
+        points integer,
+        name varchar(255) not null,
+        player_id varchar(255) not null,
+        position varchar(255) not null,
+        team_id varchar(255) not null,
+        primary key (player_id)
+    )
+2025-06-08 15:05:01 [main] DEBUG org.hibernate.SQL - 
+    create table teams (
+        founded date,
+        city varchar(255) not null,
+        league varchar(255) not null,
+        name varchar(255) not null,
+        team_id varchar(255) not null,
+        venue varchar(255),
+        primary key (team_id)
+    )
+2025-06-08 15:05:02 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-08 15:05:02 [main] INFO  com.sportsdata.etl.Application - Started Application in 2.436 seconds (process running for 2.618)
+2025-06-08 15:05:43 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-08 15:05:43 [http-nio-8080-exec-2] INFO  c.s.etl.controllers.EtlController - Data quality report requested via REST API
+2025-06-08 15:05:43 [http-nio-8080-exec-2] INFO  c.s.etl.quality.DataQualityChecker - Generating data quality report
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 15:05:43 [http-nio-8080-exec-2] INFO  c.s.etl.quality.DataQualityChecker - Data quality report generated: 0 teams, 0 players, 0 games, Overall Score: {:.2f} (0.6666666666666666)
+2025-06-08 15:06:22 [http-nio-8080-exec-3] INFO  c.s.etl.controllers.EtlController - Pipeline status requested via REST API
+2025-06-08 15:06:22 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 15:06:22 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 15:06:22 [http-nio-8080-exec-3] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 15:58:25 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 15:58:25 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 15:58:25 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 15:58:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 15:58:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-06-08 17:31:39 [main] INFO  com.sportsdata.etl.Application - Starting Application using Java 20.0.2 with PID 48104 (/Users/lengocthinh/Documents/repositories/etl-pipeline-with-java/target/classes started by lengocthinh in /Users/lengocthinh/Documents/repositories/etl-pipeline-with-java)
+2025-06-08 17:31:39 [main] INFO  com.sportsdata.etl.Application - No active profile set, falling back to 1 default profile: "default"
+2025-06-08 17:31:40 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-06-08 17:31:40 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-06-08 17:31:40 [main] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring embedded WebApplicationContext
+2025-06-08 17:31:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-06-08 17:31:40 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:sportsdb user=SA
+2025-06-08 17:31:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-06-08 17:31:40 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-06-08 17:31:41 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 17:31:41 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 17:31:41 [main] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 17:31:41 [main] DEBUG org.hibernate.SQL - 
+    create table games (
+        away_score integer,
+        home_score integer,
+        date timestamp(6) not null,
+        away_team_id varchar(255) not null,
+        game_id varchar(255) not null,
+        home_team_id varchar(255) not null,
+        status varchar(255) not null,
+        primary key (game_id)
+    )
+2025-06-08 17:31:41 [main] DEBUG org.hibernate.SQL - 
+    create table players (
+        age integer not null,
+        assists integer,
+        games_played integer,
+        points integer,
+        name varchar(255) not null,
+        player_id varchar(255) not null,
+        position varchar(255) not null,
+        team_id varchar(255) not null,
+        primary key (player_id)
+    )
+2025-06-08 17:31:41 [main] DEBUG org.hibernate.SQL - 
+    create table teams (
+        founded date,
+        city varchar(255) not null,
+        league varchar(255) not null,
+        name varchar(255) not null,
+        team_id varchar(255) not null,
+        venue varchar(255),
+        primary key (team_id)
+    )
+2025-06-08 17:31:41 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-06-08 17:31:42 [main] INFO  com.sportsdata.etl.Application - Started Application in 2.367 seconds (process running for 2.62)
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  o.a.c.c.C.[.[localhost].[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.controllers.EtlController - ETL pipeline execution requested via REST API
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Starting ETL pipeline execution - Pipeline ID: d815f489-7077-4a94-a902-f074405e95c5
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Phase 1: Starting data extraction
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Extracting teams from CSV: src/main/resources/sample-data/teams.csv
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.extractors.CsvDataExtractor - Processing CSV file: src/main/resources/sample-data/teams.csv with headers: teamId, name, city, league, founded, venue
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.extractors.CsvDataExtractor - Successfully extracted 15 teams from CSV file: src/main/resources/sample-data/teams.csv
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 teams from CSV
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Extracting players from JSON: src/main/resources/sample-data/players.json
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.extractors.JsonApiExtractor - Processing JSON file: src/main/resources/sample-data/players.json
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.extractors.JsonApiExtractor - Successfully extracted 15 players from JSON file: src/main/resources/sample-data/players.json
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 15 players from JSON
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Extracting games from XML: src/main/resources/sample-data/games.xml
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.extractors.XmlFeedExtractor - Processing XML file: src/main/resources/sample-data/games.xml
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.extractors.XmlFeedExtractor - Successfully extracted 12 games from XML file: src/main/resources/sample-data/games.xml
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Extracted 12 games from XML
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Phase 2: Starting data transformation and validation
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 teams
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 teams
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataValidator - Team validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 teams
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataCleaner - Team cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 teams
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.e.transformers.DataStandardizer - Team standardization completed: 15 teams processed
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Processed teams: 15 -> 15 valid
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 15 players
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataValidator - Starting validation of 15 players
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataValidator - Player validation completed: 15 valid, 0 errors, 0 warnings
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 15 players
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataCleaner - Player cleaning completed: 15 cleaned, 0 duplicates removed
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 15 players
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.e.transformers.DataStandardizer - Player standardization completed: 15 players processed
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Processed players: 15 -> 15 valid
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Transforming and validating 12 games
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataValidator - Starting validation of 12 games
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataValidator - Game validation completed: 12 valid, 0 errors, 0 warnings
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataCleaner - Starting data cleaning for 12 games
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.transformers.DataCleaner - Game cleaning completed: 12 cleaned, 0 duplicates removed
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.e.transformers.DataStandardizer - Starting standardization for 12 games
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.e.transformers.DataStandardizer - Game standardization completed: 12 games processed
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Processed games: 12 -> 12 valid
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Phase 3: Starting data loading
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Starting database loading process
+2025-06-08 17:38:10 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 teams into database
+2025-06-08 17:38:10 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        t1_0.team_id,
+        t1_0.city,
+        t1_0.founded,
+        t1_0.league,
+        t1_0.name,
+        t1_0.venue 
+    from
+        teams t1_0 
+    where
+        t1_0.team_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 teams
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Loading 15 players into database
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        p1_0.player_id,
+        p1_0.age,
+        p1_0.name,
+        p1_0.position,
+        p1_0.assists,
+        p1_0.games_played,
+        p1_0.points,
+        p1_0.team_id 
+    from
+        players p1_0 
+    where
+        p1_0.player_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 15 players
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Loading 12 games into database
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        g1_0.game_id,
+        g1_0.away_score,
+        g1_0.away_team_id,
+        g1_0.date,
+        g1_0.home_score,
+        g1_0.home_team_id,
+        g1_0.status 
+    from
+        games g1_0 
+    where
+        g1_0.game_id=?
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Successfully loaded 12 games
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.loaders.DatabaseLoader - Database loading completed successfully: 15 teams, 15 players, 12 games
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        teams
+        (city, founded, league, name, venue, team_id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        players
+        (age, name, position, assists, games_played, points, team_id, player_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    insert 
+    into
+        games
+        (away_score, away_team_id, date, home_score, home_team_id, status, game_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - Phase 4: Running data quality assessment
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.quality.DataQualityChecker - Generating data quality report
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        players p1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        teams t1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] DEBUG org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        games g1_0
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.quality.DataQualityChecker - Data quality report generated: 15 teams, 15 players, 12 games, Overall Score: {:.2f} (0.9)
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.pipeline.EtlPipeline - ETL pipeline completed successfully - Pipeline ID: d815f489-7077-4a94-a902-f074405e95c5, Duration: 305 ms
+2025-06-08 17:38:11 [http-nio-8080-exec-8] INFO  c.s.etl.controllers.EtlController - ETL pipeline completed successfully via REST API: d815f489-7077-4a94-a902-f074405e95c5
+2025-06-08 17:46:01 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists games cascade 
+2025-06-08 17:46:01 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists players cascade 
+2025-06-08 17:46:01 [SpringApplicationShutdownHook] DEBUG org.hibernate.SQL - 
+    drop table if exists teams cascade 
+2025-06-08 17:46:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-06-08 17:46:01 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

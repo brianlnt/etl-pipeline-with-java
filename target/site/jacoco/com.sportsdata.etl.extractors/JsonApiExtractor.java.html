@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonApiExtractor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Sports Data ETL Pipeline</a> &gt; <a href="index.source.html" class="el_package">com.sportsdata.etl.extractors</a> &gt; <span class="el_source">JsonApiExtractor.java</span></div><h1>JsonApiExtractor.java</h1><pre class="source lang-java linenums">package com.sportsdata.etl.extractors;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sportsdata.etl.models.Player;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+public class JsonApiExtractor {
+    
+<span class="nc" id="L18">    private static final Logger logger = LoggerFactory.getLogger(JsonApiExtractor.class);</span>
+    private final ObjectMapper objectMapper;
+    
+<span class="nc" id="L21">    public JsonApiExtractor() {</span>
+<span class="nc" id="L22">        this.objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L23">    }</span>
+    
+    public List&lt;Player&gt; extractPlayers(String filePath) {
+<span class="nc" id="L26">        List&lt;Player&gt; players = new ArrayList&lt;&gt;();</span>
+        
+        try {
+<span class="nc" id="L29">            JsonNode rootNode = objectMapper.readTree(new File(filePath));</span>
+<span class="nc" id="L30">            logger.info(&quot;Processing JSON file: {}&quot;, filePath);</span>
+            
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            if (rootNode.isArray()) {</span>
+                // Handle array of players
+<span class="nc bnc" id="L34" title="All 2 branches missed.">                for (JsonNode playerNode : rootNode) {</span>
+<span class="nc" id="L35">                    Player player = parsePlayerNode(playerNode);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                    if (player != null) {</span>
+<span class="nc" id="L37">                        players.add(player);</span>
+                    }
+<span class="nc" id="L39">                }</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">            } else if (rootNode.has(&quot;players&quot;)) {</span>
+                // Handle object with players array
+<span class="nc" id="L42">                JsonNode playersNode = rootNode.get(&quot;players&quot;);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                if (playersNode.isArray()) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                    for (JsonNode playerNode : playersNode) {</span>
+<span class="nc" id="L45">                        Player player = parsePlayerNode(playerNode);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">                        if (player != null) {</span>
+<span class="nc" id="L47">                            players.add(player);</span>
+                        }
+<span class="nc" id="L49">                    }</span>
+                }
+<span class="nc" id="L51">            } else {</span>
+                // Handle single player object
+<span class="nc" id="L53">                Player player = parsePlayerNode(rootNode);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                if (player != null) {</span>
+<span class="nc" id="L55">                    players.add(player);</span>
+                }
+            }
+            
+<span class="nc" id="L59">            logger.info(&quot;Successfully extracted {} players from JSON file: {}&quot;, players.size(), filePath);</span>
+            
+<span class="nc" id="L61">        } catch (IOException e) {</span>
+<span class="nc" id="L62">            logger.error(&quot;Error reading JSON file: {}&quot;, filePath, e);</span>
+<span class="nc" id="L63">        } catch (Exception e) {</span>
+<span class="nc" id="L64">            logger.error(&quot;Unexpected error processing JSON file: {}&quot;, filePath, e);</span>
+<span class="nc" id="L65">        }</span>
+        
+<span class="nc" id="L67">        return players;</span>
+    }
+    
+    private Player parsePlayerNode(JsonNode playerNode) {
+        try {
+            // Extract basic player information
+<span class="nc" id="L73">            String playerId = getTextValue(playerNode, &quot;playerId&quot;);</span>
+<span class="nc" id="L74">            String name = getTextValue(playerNode, &quot;name&quot;);</span>
+<span class="nc" id="L75">            String teamId = getTextValue(playerNode, &quot;teamId&quot;);</span>
+<span class="nc" id="L76">            String position = getTextValue(playerNode, &quot;position&quot;);</span>
+<span class="nc" id="L77">            Integer age = getIntValue(playerNode, &quot;age&quot;);</span>
+            
+            // Validate required fields
+<span class="nc bnc" id="L80" title="All 10 branches missed.">            if (playerId == null || name == null || teamId == null || position == null || age == null) {</span>
+<span class="nc" id="L81">                logger.warn(&quot;Missing required fields in player record: playerId={}, name={}, teamId={}, position={}, age={}&quot;, </span>
+                    playerId, name, teamId, position, age);
+<span class="nc" id="L83">                return null;</span>
+            }
+            
+            // Extract statistics
+<span class="nc" id="L87">            Player.PlayerStatistics statistics = parsePlayerStatistics(playerNode.get(&quot;statistics&quot;));</span>
+            
+<span class="nc" id="L89">            return new Player(playerId, name, teamId, position, age, statistics);</span>
+            
+<span class="nc" id="L91">        } catch (Exception e) {</span>
+<span class="nc" id="L92">            logger.error(&quot;Error parsing player node: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L93">            return null;</span>
+        }
+    }
+    
+    private Player.PlayerStatistics parsePlayerStatistics(JsonNode statisticsNode) {
+<span class="nc bnc" id="L98" title="All 4 branches missed.">        if (statisticsNode == null || statisticsNode.isNull()) {</span>
+<span class="nc" id="L99">            return new Player.PlayerStatistics();</span>
+        }
+        
+        try {
+<span class="nc" id="L103">            Integer gamesPlayed = getIntValue(statisticsNode, &quot;gamesPlayed&quot;, 0);</span>
+<span class="nc" id="L104">            Integer points = getIntValue(statisticsNode, &quot;points&quot;, 0);</span>
+<span class="nc" id="L105">            Integer assists = getIntValue(statisticsNode, &quot;assists&quot;, 0);</span>
+            
+<span class="nc" id="L107">            return new Player.PlayerStatistics(gamesPlayed, points, assists);</span>
+            
+<span class="nc" id="L109">        } catch (Exception e) {</span>
+<span class="nc" id="L110">            logger.warn(&quot;Error parsing player statistics, using defaults: {}&quot;, e.getMessage());</span>
+<span class="nc" id="L111">            return new Player.PlayerStatistics();</span>
+        }
+    }
+    
+    private String getTextValue(JsonNode node, String fieldName) {
+<span class="nc" id="L116">        JsonNode fieldNode = node.get(fieldName);</span>
+<span class="nc bnc" id="L117" title="All 4 branches missed.">        if (fieldNode == null || fieldNode.isNull()) {</span>
+<span class="nc" id="L118">            return null;</span>
+        }
+<span class="nc" id="L120">        String value = fieldNode.asText().trim();</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        return value.isEmpty() ? null : value;</span>
+    }
+    
+    private Integer getIntValue(JsonNode node, String fieldName) {
+<span class="nc" id="L125">        JsonNode fieldNode = node.get(fieldName);</span>
+<span class="nc bnc" id="L126" title="All 4 branches missed.">        if (fieldNode == null || fieldNode.isNull()) {</span>
+<span class="nc" id="L127">            return null;</span>
+        }
+<span class="nc" id="L129">        return fieldNode.asInt();</span>
+    }
+    
+    private Integer getIntValue(JsonNode node, String fieldName, int defaultValue) {
+<span class="nc" id="L133">        JsonNode fieldNode = node.get(fieldName);</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">        if (fieldNode == null || fieldNode.isNull()) {</span>
+<span class="nc" id="L135">            return defaultValue;</span>
+        }
+<span class="nc" id="L137">        return fieldNode.asInt(defaultValue);</span>
+    }
+    
+    public boolean validateJsonStructure(String filePath) {
+        try {
+<span class="nc" id="L142">            JsonNode rootNode = objectMapper.readTree(new File(filePath));</span>
+            
+            // Check if it's a valid JSON structure for players
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            if (rootNode.isArray()) {</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">                return !rootNode.isEmpty();</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            } else if (rootNode.has(&quot;players&quot;)) {</span>
+<span class="nc" id="L148">                JsonNode playersNode = rootNode.get(&quot;players&quot;);</span>
+<span class="nc bnc" id="L149" title="All 4 branches missed.">                return playersNode.isArray() &amp;&amp; !playersNode.isEmpty();</span>
+            } else {
+                // Check if it's a single player object
+<span class="nc bnc" id="L152" title="All 4 branches missed.">                return rootNode.has(&quot;playerId&quot;) &amp;&amp; rootNode.has(&quot;name&quot;);</span>
+            }
+            
+<span class="nc" id="L155">        } catch (IOException e) {</span>
+<span class="nc" id="L156">            logger.error(&quot;Error validating JSON file structure: {}&quot;, filePath, e);</span>
+<span class="nc" id="L157">            return false;</span>
+        }
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

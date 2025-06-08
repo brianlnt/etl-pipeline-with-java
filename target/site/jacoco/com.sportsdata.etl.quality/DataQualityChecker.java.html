@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataQualityChecker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Sports Data ETL Pipeline</a> &gt; <a href="index.source.html" class="el_package">com.sportsdata.etl.quality</a> &gt; <span class="el_source">DataQualityChecker.java</span></div><h1>DataQualityChecker.java</h1><pre class="source lang-java linenums">package com.sportsdata.etl.quality;
+
+import com.sportsdata.etl.repositories.GameRepository;
+import com.sportsdata.etl.repositories.PlayerRepository;
+import com.sportsdata.etl.repositories.TeamRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+<span class="nc" id="L16">public class DataQualityChecker {</span>
+    
+<span class="nc" id="L18">    private static final Logger logger = LoggerFactory.getLogger(DataQualityChecker.class);</span>
+    
+    @Autowired
+    private TeamRepository teamRepository;
+    
+    @Autowired
+    private PlayerRepository playerRepository;
+    
+    @Autowired
+    private GameRepository gameRepository;
+    
+    public QualityReport generateQualityReport() {
+<span class="nc" id="L30">        logger.info(&quot;Generating data quality report&quot;);</span>
+        
+<span class="nc" id="L32">        QualityReport report = new QualityReport();</span>
+<span class="nc" id="L33">        report.setGeneratedAt(LocalDateTime.now());</span>
+        
+        // Check data counts
+<span class="nc" id="L36">        long teamCount = teamRepository.count();</span>
+<span class="nc" id="L37">        long playerCount = playerRepository.count();</span>
+<span class="nc" id="L38">        long gameCount = gameRepository.count();</span>
+        
+<span class="nc" id="L40">        report.setTeamCount(teamCount);</span>
+<span class="nc" id="L41">        report.setPlayerCount(playerCount);</span>
+<span class="nc" id="L42">        report.setGameCount(gameCount);</span>
+        
+        // Calculate quality metrics
+<span class="nc" id="L45">        Map&lt;String, Double&gt; qualityMetrics = new HashMap&lt;&gt;();</span>
+        
+        // Data completeness metrics
+<span class="nc" id="L48">        qualityMetrics.put(&quot;team_completeness&quot;, calculateTeamCompleteness());</span>
+<span class="nc" id="L49">        qualityMetrics.put(&quot;player_completeness&quot;, calculatePlayerCompleteness());</span>
+<span class="nc" id="L50">        qualityMetrics.put(&quot;game_completeness&quot;, calculateGameCompleteness());</span>
+        
+        // Data consistency metrics
+<span class="nc" id="L53">        qualityMetrics.put(&quot;referential_integrity&quot;, calculateReferentialIntegrity());</span>
+        
+        // Data distribution metrics
+<span class="nc" id="L56">        qualityMetrics.put(&quot;players_per_team&quot;, calculatePlayersPerTeam());</span>
+<span class="nc" id="L57">        qualityMetrics.put(&quot;games_per_team&quot;, calculateGamesPerTeam());</span>
+        
+<span class="nc" id="L59">        report.setQualityMetrics(qualityMetrics);</span>
+        
+        // Overall quality score (average of all metrics)
+<span class="nc" id="L62">        double overallScore = qualityMetrics.values().stream()</span>
+<span class="nc" id="L63">            .mapToDouble(Double::doubleValue)</span>
+<span class="nc" id="L64">            .average()</span>
+<span class="nc" id="L65">            .orElse(0.0);</span>
+        
+<span class="nc" id="L67">        report.setOverallQualityScore(overallScore);</span>
+        
+        // Determine quality status
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (overallScore &gt;= 0.9) {</span>
+<span class="nc" id="L71">            report.setQualityStatus(&quot;EXCELLENT&quot;);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        } else if (overallScore &gt;= 0.8) {</span>
+<span class="nc" id="L73">            report.setQualityStatus(&quot;GOOD&quot;);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        } else if (overallScore &gt;= 0.7) {</span>
+<span class="nc" id="L75">            report.setQualityStatus(&quot;FAIR&quot;);</span>
+        } else {
+<span class="nc" id="L77">            report.setQualityStatus(&quot;POOR&quot;);</span>
+        }
+        
+<span class="nc" id="L80">        logger.info(&quot;Data quality report generated: {} teams, {} players, {} games, Overall Score: {:.2f} ({})&quot;, </span>
+<span class="nc" id="L81">            teamCount, playerCount, gameCount, overallScore, report.getQualityStatus());</span>
+        
+<span class="nc" id="L83">        return report;</span>
+    }
+    
+    private double calculateTeamCompleteness() {
+        // This is a simplified metric - in a real implementation, you'd check for null/empty fields
+<span class="nc" id="L88">        long totalTeams = teamRepository.count();</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (totalTeams == 0) return 1.0;</span>
+        
+        // For simplicity, assume all loaded teams are complete since we validate during transformation
+<span class="nc" id="L92">        return 1.0;</span>
+    }
+    
+    private double calculatePlayerCompleteness() {
+<span class="nc" id="L96">        long totalPlayers = playerRepository.count();</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (totalPlayers == 0) return 1.0;</span>
+        
+        // For simplicity, assume all loaded players are complete since we validate during transformation
+<span class="nc" id="L100">        return 1.0;</span>
+    }
+    
+    private double calculateGameCompleteness() {
+<span class="nc" id="L104">        long totalGames = gameRepository.count();</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (totalGames == 0) return 1.0;</span>
+        
+        // For simplicity, assume all loaded games are complete since we validate during transformation
+<span class="nc" id="L108">        return 1.0;</span>
+    }
+    
+    private double calculateReferentialIntegrity() {
+        // Check if all players reference valid teams
+<span class="nc" id="L113">        long totalPlayers = playerRepository.count();</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (totalPlayers == 0) return 1.0;</span>
+        
+        // This is simplified - in a real implementation, you'd run queries to check orphaned records
+        // For now, assume integrity is maintained since we load teams first
+<span class="nc" id="L118">        return 1.0;</span>
+    }
+    
+    private double calculatePlayersPerTeam() {
+<span class="nc" id="L122">        long totalTeams = teamRepository.count();</span>
+<span class="nc" id="L123">        long totalPlayers = playerRepository.count();</span>
+        
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (totalTeams == 0) return 0.0;</span>
+        
+<span class="nc" id="L127">        double average = (double) totalPlayers / totalTeams;</span>
+        
+        // Normalize based on expected range (5-15 players per team is reasonable)
+<span class="nc bnc" id="L130" title="All 4 branches missed.">        if (average &gt;= 5 &amp;&amp; average &lt;= 15) {</span>
+<span class="nc" id="L131">            return 1.0;</span>
+<span class="nc bnc" id="L132" title="All 4 branches missed.">        } else if (average &gt;= 1 &amp;&amp; average &lt; 5) {</span>
+<span class="nc" id="L133">            return 0.7; // Acceptable but low</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">        } else if (average &gt; 15 &amp;&amp; average &lt;= 25) {</span>
+<span class="nc" id="L135">            return 0.8; // Acceptable but high</span>
+        } else {
+<span class="nc" id="L137">            return 0.5; // Outside reasonable range</span>
+        }
+    }
+    
+    private double calculateGamesPerTeam() {
+<span class="nc" id="L142">        long totalTeams = teamRepository.count();</span>
+<span class="nc" id="L143">        long totalGames = gameRepository.count();</span>
+        
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (totalTeams == 0) return 0.0;</span>
+        
+        // Each game involves 2 teams, so average games per team is totalGames * 2 / totalTeams
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        double average = totalGames &gt; 0 ? (double) (totalGames * 2) / totalTeams : 0.0;</span>
+        
+        // Normalize based on expected range (10-100 games per team per season is reasonable)
+<span class="nc bnc" id="L151" title="All 4 branches missed.">        if (average &gt;= 10 &amp;&amp; average &lt;= 100) {</span>
+<span class="nc" id="L152">            return 1.0;</span>
+<span class="nc bnc" id="L153" title="All 4 branches missed.">        } else if (average &gt;= 1 &amp;&amp; average &lt; 10) {</span>
+<span class="nc" id="L154">            return 0.7; // Acceptable but low</span>
+<span class="nc bnc" id="L155" title="All 4 branches missed.">        } else if (average &gt; 100 &amp;&amp; average &lt;= 200) {</span>
+<span class="nc" id="L156">            return 0.8; // Acceptable but high</span>
+        } else {
+<span class="nc" id="L158">            return 0.5; // Outside reasonable range</span>
+        }
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

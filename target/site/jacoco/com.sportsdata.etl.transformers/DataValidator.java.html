@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Sports Data ETL Pipeline</a> &gt; <a href="index.source.html" class="el_package">com.sportsdata.etl.transformers</a> &gt; <span class="el_source">DataValidator.java</span></div><h1>DataValidator.java</h1><pre class="source lang-java linenums">package com.sportsdata.etl.transformers;
+
+import com.sportsdata.etl.models.Game;
+import com.sportsdata.etl.models.Player;
+import com.sportsdata.etl.models.Team;
+import com.sportsdata.etl.quality.ValidationRules;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+<span class="nc" id="L16">public class DataValidator {</span>
+    
+<span class="nc" id="L18">    private static final Logger logger = LoggerFactory.getLogger(DataValidator.class);</span>
+    
+    @Autowired
+    private ValidationRules validationRules;
+    
+    public List&lt;Team&gt; validateTeams(List&lt;Team&gt; teams) {
+<span class="nc bnc" id="L24" title="All 4 branches missed.">        if (teams == null || teams.isEmpty()) {</span>
+<span class="nc" id="L25">            logger.info(&quot;No teams to validate&quot;);</span>
+<span class="nc" id="L26">            return new ArrayList&lt;&gt;();</span>
+        }
+        
+<span class="nc" id="L29">        List&lt;Team&gt; validTeams = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L30">        int errorCount = 0;</span>
+<span class="nc" id="L31">        int warningCount = 0;</span>
+        
+<span class="nc" id="L33">        logger.info(&quot;Starting validation of {} teams&quot;, teams.size());</span>
+        
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        for (Team team : teams) {</span>
+<span class="nc" id="L36">            ValidationRules.ValidationResult result = validationRules.validateTeam(team);</span>
+            
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (result.isValid()) {</span>
+<span class="nc" id="L39">                validTeams.add(team);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                if (result.hasWarnings()) {</span>
+<span class="nc" id="L41">                    warningCount += result.getWarningCount();</span>
+<span class="nc" id="L42">                    logger.warn(&quot;Team {} has warnings: {}&quot;, team.getTeamId(), result.getWarnings());</span>
+                }
+            } else {
+<span class="nc" id="L45">                errorCount += result.getErrorCount();</span>
+<span class="nc" id="L46">                logger.error(&quot;Team {} failed validation: {}&quot;, team.getTeamId(), result.getErrors());</span>
+            }
+<span class="nc" id="L48">        }</span>
+        
+<span class="nc" id="L50">        logger.info(&quot;Team validation completed: {} valid, {} errors, {} warnings&quot;, </span>
+<span class="nc" id="L51">            validTeams.size(), errorCount, warningCount);</span>
+        
+<span class="nc" id="L53">        return validTeams;</span>
+    }
+    
+    public List&lt;Player&gt; validatePlayers(List&lt;Player&gt; players) {
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        if (players == null || players.isEmpty()) {</span>
+<span class="nc" id="L58">            logger.info(&quot;No players to validate&quot;);</span>
+<span class="nc" id="L59">            return new ArrayList&lt;&gt;();</span>
+        }
+        
+<span class="nc" id="L62">        List&lt;Player&gt; validPlayers = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L63">        int errorCount = 0;</span>
+<span class="nc" id="L64">        int warningCount = 0;</span>
+        
+<span class="nc" id="L66">        logger.info(&quot;Starting validation of {} players&quot;, players.size());</span>
+        
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        for (Player player : players) {</span>
+<span class="nc" id="L69">            ValidationRules.ValidationResult result = validationRules.validatePlayer(player);</span>
+            
+<span class="nc bnc" id="L71" title="All 2 branches missed.">            if (result.isValid()) {</span>
+<span class="nc" id="L72">                validPlayers.add(player);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                if (result.hasWarnings()) {</span>
+<span class="nc" id="L74">                    warningCount += result.getWarningCount();</span>
+<span class="nc" id="L75">                    logger.warn(&quot;Player {} has warnings: {}&quot;, player.getPlayerId(), result.getWarnings());</span>
+                }
+            } else {
+<span class="nc" id="L78">                errorCount += result.getErrorCount();</span>
+<span class="nc" id="L79">                logger.error(&quot;Player {} failed validation: {}&quot;, player.getPlayerId(), result.getErrors());</span>
+            }
+<span class="nc" id="L81">        }</span>
+        
+<span class="nc" id="L83">        logger.info(&quot;Player validation completed: {} valid, {} errors, {} warnings&quot;, </span>
+<span class="nc" id="L84">            validPlayers.size(), errorCount, warningCount);</span>
+        
+<span class="nc" id="L86">        return validPlayers;</span>
+    }
+    
+    public List&lt;Game&gt; validateGames(List&lt;Game&gt; games) {
+<span class="nc bnc" id="L90" title="All 4 branches missed.">        if (games == null || games.isEmpty()) {</span>
+<span class="nc" id="L91">            logger.info(&quot;No games to validate&quot;);</span>
+<span class="nc" id="L92">            return new ArrayList&lt;&gt;();</span>
+        }
+        
+<span class="nc" id="L95">        List&lt;Game&gt; validGames = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L96">        int errorCount = 0;</span>
+<span class="nc" id="L97">        int warningCount = 0;</span>
+        
+<span class="nc" id="L99">        logger.info(&quot;Starting validation of {} games&quot;, games.size());</span>
+        
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        for (Game game : games) {</span>
+<span class="nc" id="L102">            ValidationRules.ValidationResult result = validationRules.validateGame(game);</span>
+            
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (result.isValid()) {</span>
+<span class="nc" id="L105">                validGames.add(game);</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">                if (result.hasWarnings()) {</span>
+<span class="nc" id="L107">                    warningCount += result.getWarningCount();</span>
+<span class="nc" id="L108">                    logger.warn(&quot;Game {} has warnings: {}&quot;, game.getGameId(), result.getWarnings());</span>
+                }
+            } else {
+<span class="nc" id="L111">                errorCount += result.getErrorCount();</span>
+<span class="nc" id="L112">                logger.error(&quot;Game {} failed validation: {}&quot;, game.getGameId(), result.getErrors());</span>
+            }
+<span class="nc" id="L114">        }</span>
+        
+<span class="nc" id="L116">        logger.info(&quot;Game validation completed: {} valid, {} errors, {} warnings&quot;, </span>
+<span class="nc" id="L117">            validGames.size(), errorCount, warningCount);</span>
+        
+<span class="nc" id="L119">        return validGames;</span>
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

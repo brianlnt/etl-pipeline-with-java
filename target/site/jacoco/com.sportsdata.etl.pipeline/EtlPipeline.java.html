@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EtlPipeline.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Sports Data ETL Pipeline</a> &gt; <a href="index.source.html" class="el_package">com.sportsdata.etl.pipeline</a> &gt; <span class="el_source">EtlPipeline.java</span></div><h1>EtlPipeline.java</h1><pre class="source lang-java linenums">package com.sportsdata.etl.pipeline;
+
+import com.sportsdata.etl.extractors.CsvDataExtractor;
+import com.sportsdata.etl.extractors.JsonApiExtractor;
+import com.sportsdata.etl.extractors.XmlFeedExtractor;
+import com.sportsdata.etl.loaders.DatabaseLoader;
+import com.sportsdata.etl.models.Game;
+import com.sportsdata.etl.models.Player;
+import com.sportsdata.etl.models.Team;
+import com.sportsdata.etl.quality.DataQualityChecker;
+import com.sportsdata.etl.quality.QualityReport;
+import com.sportsdata.etl.transformers.DataCleaner;
+import com.sportsdata.etl.transformers.DataStandardizer;
+import com.sportsdata.etl.transformers.DataValidator;
+import com.sportsdata.etl.utils.MetricsCollector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+<span class="nc" id="L26">public class EtlPipeline {</span>
+    
+<span class="nc" id="L28">    private static final Logger logger = LoggerFactory.getLogger(EtlPipeline.class);</span>
+    
+    @Autowired
+    private CsvDataExtractor csvExtractor;
+    
+    @Autowired
+    private JsonApiExtractor jsonExtractor;
+    
+    @Autowired
+    private XmlFeedExtractor xmlExtractor;
+    
+    @Autowired
+    private DataValidator dataValidator;
+    
+    @Autowired
+    private DataCleaner dataCleaner;
+    
+    @Autowired
+    private DataStandardizer dataStandardizer;
+    
+    @Autowired
+    private DatabaseLoader databaseLoader;
+    
+    @Autowired
+    private DataQualityChecker qualityChecker;
+    
+    @Autowired
+    private MetricsCollector metricsCollector;
+    
+    public PipelineResult executeFullPipeline(PipelineConfig config) {
+<span class="nc" id="L58">        String pipelineId = UUID.randomUUID().toString();</span>
+<span class="nc" id="L59">        LocalDateTime startTime = LocalDateTime.now();</span>
+        
+<span class="nc" id="L61">        logger.info(&quot;Starting ETL pipeline execution - Pipeline ID: {}&quot;, pipelineId);</span>
+        
+<span class="nc" id="L63">        PipelineResult result = new PipelineResult(pipelineId, startTime);</span>
+        
+        try {
+            // Phase 1: Extraction
+<span class="nc" id="L67">            logger.info(&quot;Phase 1: Starting data extraction&quot;);</span>
+<span class="nc" id="L68">            ExtractedData extractedData = extractData(config);</span>
+<span class="nc" id="L69">            result.setExtractedData(extractedData);</span>
+<span class="nc" id="L70">            metricsCollector.recordExtractionMetrics(extractedData);</span>
+            
+            // Phase 2: Transformation and Validation
+<span class="nc" id="L73">            logger.info(&quot;Phase 2: Starting data transformation and validation&quot;);</span>
+<span class="nc" id="L74">            TransformedData transformedData = transformAndValidateData(extractedData);</span>
+<span class="nc" id="L75">            result.setTransformedData(transformedData);</span>
+<span class="nc" id="L76">            metricsCollector.recordTransformationMetrics(transformedData);</span>
+            
+            // Phase 3: Loading
+<span class="nc" id="L79">            logger.info(&quot;Phase 3: Starting data loading&quot;);</span>
+<span class="nc" id="L80">            LoadResult loadResult = loadData(transformedData);</span>
+<span class="nc" id="L81">            result.setLoadResult(loadResult);</span>
+<span class="nc" id="L82">            metricsCollector.recordLoadMetrics(loadResult);</span>
+            
+            // Phase 4: Quality Assessment
+<span class="nc" id="L85">            logger.info(&quot;Phase 4: Running data quality assessment&quot;);</span>
+<span class="nc" id="L86">            QualityReport qualityReport = qualityChecker.generateQualityReport();</span>
+<span class="nc" id="L87">            result.setQualityReport(qualityReport);</span>
+            
+<span class="nc" id="L89">            result.setEndTime(LocalDateTime.now());</span>
+<span class="nc" id="L90">            result.setSuccess(true);</span>
+            
+<span class="nc" id="L92">            logger.info(&quot;ETL pipeline completed successfully - Pipeline ID: {}, Duration: {} ms&quot;, </span>
+<span class="nc" id="L93">                pipelineId, result.getDurationMs());</span>
+            
+<span class="nc" id="L95">        } catch (Exception e) {</span>
+<span class="nc" id="L96">            logger.error(&quot;ETL pipeline failed - Pipeline ID: {}&quot;, pipelineId, e);</span>
+<span class="nc" id="L97">            result.setEndTime(LocalDateTime.now());</span>
+<span class="nc" id="L98">            result.setSuccess(false);</span>
+<span class="nc" id="L99">            result.setErrorMessage(e.getMessage());</span>
+<span class="nc" id="L100">        }</span>
+        
+<span class="nc" id="L102">        return result;</span>
+    }
+    
+    private ExtractedData extractData(PipelineConfig config) {
+<span class="nc" id="L106">        ExtractedData extractedData = new ExtractedData();</span>
+        
+        // Extract teams from CSV
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (config.getTeamsCsvPath() != null) {</span>
+            try {
+<span class="nc" id="L111">                logger.info(&quot;Extracting teams from CSV: {}&quot;, config.getTeamsCsvPath());</span>
+<span class="nc" id="L112">                List&lt;Team&gt; teams = csvExtractor.extractTeams(config.getTeamsCsvPath());</span>
+<span class="nc" id="L113">                extractedData.setTeams(teams);</span>
+<span class="nc" id="L114">                logger.info(&quot;Extracted {} teams from CSV&quot;, teams.size());</span>
+<span class="nc" id="L115">            } catch (Exception e) {</span>
+<span class="nc" id="L116">                logger.error(&quot;Failed to extract teams from CSV: {}&quot;, config.getTeamsCsvPath(), e);</span>
+<span class="nc" id="L117">                throw new RuntimeException(&quot;Teams extraction failed&quot;, e);</span>
+<span class="nc" id="L118">            }</span>
+        }
+        
+        // Extract players from JSON
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        if (config.getPlayersJsonPath() != null) {</span>
+            try {
+<span class="nc" id="L124">                logger.info(&quot;Extracting players from JSON: {}&quot;, config.getPlayersJsonPath());</span>
+<span class="nc" id="L125">                List&lt;Player&gt; players = jsonExtractor.extractPlayers(config.getPlayersJsonPath());</span>
+<span class="nc" id="L126">                extractedData.setPlayers(players);</span>
+<span class="nc" id="L127">                logger.info(&quot;Extracted {} players from JSON&quot;, players.size());</span>
+<span class="nc" id="L128">            } catch (Exception e) {</span>
+<span class="nc" id="L129">                logger.error(&quot;Failed to extract players from JSON: {}&quot;, config.getPlayersJsonPath(), e);</span>
+<span class="nc" id="L130">                throw new RuntimeException(&quot;Players extraction failed&quot;, e);</span>
+<span class="nc" id="L131">            }</span>
+        }
+        
+        // Extract games from XML
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (config.getGamesXmlPath() != null) {</span>
+            try {
+<span class="nc" id="L137">                logger.info(&quot;Extracting games from XML: {}&quot;, config.getGamesXmlPath());</span>
+<span class="nc" id="L138">                List&lt;Game&gt; games = xmlExtractor.extractGames(config.getGamesXmlPath());</span>
+<span class="nc" id="L139">                extractedData.setGames(games);</span>
+<span class="nc" id="L140">                logger.info(&quot;Extracted {} games from XML&quot;, games.size());</span>
+<span class="nc" id="L141">            } catch (Exception e) {</span>
+<span class="nc" id="L142">                logger.error(&quot;Failed to extract games from XML: {}&quot;, config.getGamesXmlPath(), e);</span>
+<span class="nc" id="L143">                throw new RuntimeException(&quot;Games extraction failed&quot;, e);</span>
+<span class="nc" id="L144">            }</span>
+        }
+        
+<span class="nc" id="L147">        return extractedData;</span>
+    }
+    
+    private TransformedData transformAndValidateData(ExtractedData extractedData) {
+<span class="nc" id="L151">        TransformedData transformedData = new TransformedData();</span>
+        
+        // Transform and validate teams
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        if (extractedData.getTeams() != null) {</span>
+<span class="nc" id="L155">            logger.info(&quot;Transforming and validating {} teams&quot;, extractedData.getTeams().size());</span>
+<span class="nc" id="L156">            List&lt;Team&gt; validatedTeams = dataValidator.validateTeams(extractedData.getTeams());</span>
+<span class="nc" id="L157">            List&lt;Team&gt; cleanedTeams = dataCleaner.cleanTeams(validatedTeams);</span>
+<span class="nc" id="L158">            List&lt;Team&gt; standardizedTeams = dataStandardizer.standardizeTeams(cleanedTeams);</span>
+<span class="nc" id="L159">            transformedData.setTeams(standardizedTeams);</span>
+<span class="nc" id="L160">            logger.info(&quot;Processed teams: {} -&gt; {} valid&quot;, extractedData.getTeams().size(), standardizedTeams.size());</span>
+        }
+        
+        // Transform and validate players
+<span class="nc bnc" id="L164" title="All 2 branches missed.">        if (extractedData.getPlayers() != null) {</span>
+<span class="nc" id="L165">            logger.info(&quot;Transforming and validating {} players&quot;, extractedData.getPlayers().size());</span>
+<span class="nc" id="L166">            List&lt;Player&gt; validatedPlayers = dataValidator.validatePlayers(extractedData.getPlayers());</span>
+<span class="nc" id="L167">            List&lt;Player&gt; cleanedPlayers = dataCleaner.cleanPlayers(validatedPlayers);</span>
+<span class="nc" id="L168">            List&lt;Player&gt; standardizedPlayers = dataStandardizer.standardizePlayers(cleanedPlayers);</span>
+<span class="nc" id="L169">            transformedData.setPlayers(standardizedPlayers);</span>
+<span class="nc" id="L170">            logger.info(&quot;Processed players: {} -&gt; {} valid&quot;, extractedData.getPlayers().size(), standardizedPlayers.size());</span>
+        }
+        
+        // Transform and validate games
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (extractedData.getGames() != null) {</span>
+<span class="nc" id="L175">            logger.info(&quot;Transforming and validating {} games&quot;, extractedData.getGames().size());</span>
+<span class="nc" id="L176">            List&lt;Game&gt; validatedGames = dataValidator.validateGames(extractedData.getGames());</span>
+<span class="nc" id="L177">            List&lt;Game&gt; cleanedGames = dataCleaner.cleanGames(validatedGames);</span>
+<span class="nc" id="L178">            List&lt;Game&gt; standardizedGames = dataStandardizer.standardizeGames(cleanedGames);</span>
+<span class="nc" id="L179">            transformedData.setGames(standardizedGames);</span>
+<span class="nc" id="L180">            logger.info(&quot;Processed games: {} -&gt; {} valid&quot;, extractedData.getGames().size(), standardizedGames.size());</span>
+        }
+        
+<span class="nc" id="L183">        return transformedData;</span>
+    }
+    
+    private LoadResult loadData(TransformedData transformedData) {
+<span class="nc" id="L187">        return databaseLoader.loadAllData(transformedData);</span>
+    }
+    
+    // Data Transfer Objects
+    public static class PipelineConfig {
+        private String teamsCsvPath;
+        private String playersJsonPath;
+        private String gamesXmlPath;
+        
+<span class="nc" id="L196">        public PipelineConfig() {}</span>
+        
+<span class="nc" id="L198">        public PipelineConfig(String teamsCsvPath, String playersJsonPath, String gamesXmlPath) {</span>
+<span class="nc" id="L199">            this.teamsCsvPath = teamsCsvPath;</span>
+<span class="nc" id="L200">            this.playersJsonPath = playersJsonPath;</span>
+<span class="nc" id="L201">            this.gamesXmlPath = gamesXmlPath;</span>
+<span class="nc" id="L202">        }</span>
+        
+        // Getters and setters
+<span class="nc" id="L205">        public String getTeamsCsvPath() { return teamsCsvPath; }</span>
+<span class="nc" id="L206">        public void setTeamsCsvPath(String teamsCsvPath) { this.teamsCsvPath = teamsCsvPath; }</span>
+        
+<span class="nc" id="L208">        public String getPlayersJsonPath() { return playersJsonPath; }</span>
+<span class="nc" id="L209">        public void setPlayersJsonPath(String playersJsonPath) { this.playersJsonPath = playersJsonPath; }</span>
+        
+<span class="nc" id="L211">        public String getGamesXmlPath() { return gamesXmlPath; }</span>
+<span class="nc" id="L212">        public void setGamesXmlPath(String gamesXmlPath) { this.gamesXmlPath = gamesXmlPath; }</span>
+    }
+    
+<span class="nc" id="L215">    public static class ExtractedData {</span>
+        private List&lt;Team&gt; teams;
+        private List&lt;Player&gt; players;
+        private List&lt;Game&gt; games;
+        
+        // Getters and setters
+<span class="nc" id="L221">        public List&lt;Team&gt; getTeams() { return teams; }</span>
+<span class="nc" id="L222">        public void setTeams(List&lt;Team&gt; teams) { this.teams = teams; }</span>
+        
+<span class="nc" id="L224">        public List&lt;Player&gt; getPlayers() { return players; }</span>
+<span class="nc" id="L225">        public void setPlayers(List&lt;Player&gt; players) { this.players = players; }</span>
+        
+<span class="nc" id="L227">        public List&lt;Game&gt; getGames() { return games; }</span>
+<span class="nc" id="L228">        public void setGames(List&lt;Game&gt; games) { this.games = games; }</span>
+    }
+    
+<span class="nc" id="L231">    public static class TransformedData {</span>
+        private List&lt;Team&gt; teams;
+        private List&lt;Player&gt; players;
+        private List&lt;Game&gt; games;
+        
+        // Getters and setters
+<span class="nc" id="L237">        public List&lt;Team&gt; getTeams() { return teams; }</span>
+<span class="nc" id="L238">        public void setTeams(List&lt;Team&gt; teams) { this.teams = teams; }</span>
+        
+<span class="nc" id="L240">        public List&lt;Player&gt; getPlayers() { return players; }</span>
+<span class="nc" id="L241">        public void setPlayers(List&lt;Player&gt; players) { this.players = players; }</span>
+        
+<span class="nc" id="L243">        public List&lt;Game&gt; getGames() { return games; }</span>
+<span class="nc" id="L244">        public void setGames(List&lt;Game&gt; games) { this.games = games; }</span>
+    }
+    
+<span class="nc" id="L247">    public static class LoadResult {</span>
+        private int teamsLoaded;
+        private int playersLoaded;
+        private int gamesLoaded;
+        private boolean success;
+        private String errorMessage;
+        
+        // Getters and setters
+<span class="nc" id="L255">        public int getTeamsLoaded() { return teamsLoaded; }</span>
+<span class="nc" id="L256">        public void setTeamsLoaded(int teamsLoaded) { this.teamsLoaded = teamsLoaded; }</span>
+        
+<span class="nc" id="L258">        public int getPlayersLoaded() { return playersLoaded; }</span>
+<span class="nc" id="L259">        public void setPlayersLoaded(int playersLoaded) { this.playersLoaded = playersLoaded; }</span>
+        
+<span class="nc" id="L261">        public int getGamesLoaded() { return gamesLoaded; }</span>
+<span class="nc" id="L262">        public void setGamesLoaded(int gamesLoaded) { this.gamesLoaded = gamesLoaded; }</span>
+        
+<span class="nc" id="L264">        public boolean isSuccess() { return success; }</span>
+<span class="nc" id="L265">        public void setSuccess(boolean success) { this.success = success; }</span>
+        
+<span class="nc" id="L267">        public String getErrorMessage() { return errorMessage; }</span>
+<span class="nc" id="L268">        public void setErrorMessage(String errorMessage) { this.errorMessage = errorMessage; }</span>
+    }
+    
+    public static class PipelineResult {
+        private final String pipelineId;
+        private final LocalDateTime startTime;
+        private LocalDateTime endTime;
+        private boolean success;
+        private String errorMessage;
+        private ExtractedData extractedData;
+        private TransformedData transformedData;
+        private LoadResult loadResult;
+        private QualityReport qualityReport;
+        
+<span class="nc" id="L282">        public PipelineResult(String pipelineId, LocalDateTime startTime) {</span>
+<span class="nc" id="L283">            this.pipelineId = pipelineId;</span>
+<span class="nc" id="L284">            this.startTime = startTime;</span>
+<span class="nc" id="L285">        }</span>
+        
+        public long getDurationMs() {
+<span class="nc bnc" id="L288" title="All 2 branches missed.">            if (endTime != null) {</span>
+<span class="nc" id="L289">                return java.time.Duration.between(startTime, endTime).toMillis();</span>
+            }
+<span class="nc" id="L291">            return 0;</span>
+        }
+        
+        // Getters and setters
+<span class="nc" id="L295">        public String getPipelineId() { return pipelineId; }</span>
+<span class="nc" id="L296">        public LocalDateTime getStartTime() { return startTime; }</span>
+<span class="nc" id="L297">        public LocalDateTime getEndTime() { return endTime; }</span>
+<span class="nc" id="L298">        public void setEndTime(LocalDateTime endTime) { this.endTime = endTime; }</span>
+        
+<span class="nc" id="L300">        public boolean isSuccess() { return success; }</span>
+<span class="nc" id="L301">        public void setSuccess(boolean success) { this.success = success; }</span>
+        
+<span class="nc" id="L303">        public String getErrorMessage() { return errorMessage; }</span>
+<span class="nc" id="L304">        public void setErrorMessage(String errorMessage) { this.errorMessage = errorMessage; }</span>
+        
+<span class="nc" id="L306">        public ExtractedData getExtractedData() { return extractedData; }</span>
+<span class="nc" id="L307">        public void setExtractedData(ExtractedData extractedData) { this.extractedData = extractedData; }</span>
+        
+<span class="nc" id="L309">        public TransformedData getTransformedData() { return transformedData; }</span>
+<span class="nc" id="L310">        public void setTransformedData(TransformedData transformedData) { this.transformedData = transformedData; }</span>
+        
+<span class="nc" id="L312">        public LoadResult getLoadResult() { return loadResult; }</span>
+<span class="nc" id="L313">        public void setLoadResult(LoadResult loadResult) { this.loadResult = loadResult; }</span>
+        
+<span class="nc" id="L315">        public QualityReport getQualityReport() { return qualityReport; }</span>
+<span class="nc" id="L316">        public void setQualityReport(QualityReport qualityReport) { this.qualityReport = qualityReport; }</span>
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

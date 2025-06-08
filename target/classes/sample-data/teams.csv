@@ -1,0 +1,16 @@
+teamId,name,city,league,founded,venue
+LAL,Los Angeles Lakers,Los Angeles,NBA,1947-01-01,Crypto.com Arena
+GSW,Golden State Warriors,San Francisco,NBA,1946-01-01,Chase Center
+BOS,Boston Celtics,Boston,NBA,1946-01-01,TD Garden
+MIA,Miami Heat,Miami,NBA,1988-01-01,FTX Arena
+CHI,Chicago Bulls,Chicago,NBA,1966-01-01,United Center
+NYK,New York Knicks,New York,NBA,1946-01-01,Madison Square Garden
+PHX,Phoenix Suns,Phoenix,NBA,1968-01-01,Phoenix Suns Arena
+MIL,Milwaukee Bucks,Milwaukee,NBA,1968-01-01,Fiserv Forum
+PHI,Philadelphia 76ers,Philadelphia,NBA,1963-01-01,Wells Fargo Center
+BKN,Brooklyn Nets,Brooklyn,NBA,1976-01-01,Barclays Center
+DEN,Denver Nuggets,Denver,NBA,1976-01-01,Ball Arena
+DAL,Dallas Mavericks,Dallas,NBA,1980-01-01,American Airlines Center
+UNC,North Carolina Tar Heels,Chapel Hill,NCAA,1910-01-01,Dean Smith Center
+DUKE,Duke Blue Devils,Durham,NCAA,1905-01-01,Cameron Indoor Stadium
+UK,Kentucky Wildcats,Lexington,NCAA,1903-01-01,Rupp Arena 

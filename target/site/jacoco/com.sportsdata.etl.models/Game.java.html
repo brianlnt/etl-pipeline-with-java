@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Sports Data ETL Pipeline</a> &gt; <a href="index.source.html" class="el_package">com.sportsdata.etl.models</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package com.sportsdata.etl.models;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+@Entity
+@Table(name = &quot;games&quot;)
+public class Game {
+    
+    @Id
+    @Column(name = &quot;game_id&quot;)
+    private String gameId;
+    
+    @NotBlank
+    @Column(name = &quot;home_team_id&quot;, nullable = false)
+    private String homeTeamId;
+    
+    @NotBlank
+    @Column(name = &quot;away_team_id&quot;, nullable = false)
+    private String awayTeamId;
+    
+    @NotNull
+    @Column(name = &quot;date&quot;, nullable = false)
+    @JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)
+    private LocalDateTime date;
+    
+    @PositiveOrZero
+    @Column(name = &quot;home_score&quot;)
+    private Integer homeScore;
+    
+    @PositiveOrZero
+    @Column(name = &quot;away_score&quot;)
+    private Integer awayScore;
+    
+    @NotBlank
+    @Column(name = &quot;status&quot;, nullable = false)
+    private String status;
+    
+    // Constructors
+<span class="nc" id="L45">    public Game() {}</span>
+    
+    public Game(String gameId, String homeTeamId, String awayTeamId, LocalDateTime date, 
+<span class="nc" id="L48">                Integer homeScore, Integer awayScore, String status) {</span>
+<span class="nc" id="L49">        this.gameId = gameId;</span>
+<span class="nc" id="L50">        this.homeTeamId = homeTeamId;</span>
+<span class="nc" id="L51">        this.awayTeamId = awayTeamId;</span>
+<span class="nc" id="L52">        this.date = date;</span>
+<span class="nc" id="L53">        this.homeScore = homeScore;</span>
+<span class="nc" id="L54">        this.awayScore = awayScore;</span>
+<span class="nc" id="L55">        this.status = status;</span>
+<span class="nc" id="L56">    }</span>
+    
+    // Getters and Setters
+    public String getGameId() {
+<span class="nc" id="L60">        return gameId;</span>
+    }
+    
+    public void setGameId(String gameId) {
+<span class="nc" id="L64">        this.gameId = gameId;</span>
+<span class="nc" id="L65">    }</span>
+    
+    public String getHomeTeamId() {
+<span class="nc" id="L68">        return homeTeamId;</span>
+    }
+    
+    public void setHomeTeamId(String homeTeamId) {
+<span class="nc" id="L72">        this.homeTeamId = homeTeamId;</span>
+<span class="nc" id="L73">    }</span>
+    
+    public String getAwayTeamId() {
+<span class="nc" id="L76">        return awayTeamId;</span>
+    }
+    
+    public void setAwayTeamId(String awayTeamId) {
+<span class="nc" id="L80">        this.awayTeamId = awayTeamId;</span>
+<span class="nc" id="L81">    }</span>
+    
+    public LocalDateTime getDate() {
+<span class="nc" id="L84">        return date;</span>
+    }
+    
+    public void setDate(LocalDateTime date) {
+<span class="nc" id="L88">        this.date = date;</span>
+<span class="nc" id="L89">    }</span>
+    
+    public Integer getHomeScore() {
+<span class="nc" id="L92">        return homeScore;</span>
+    }
+    
+    public void setHomeScore(Integer homeScore) {
+<span class="nc" id="L96">        this.homeScore = homeScore;</span>
+<span class="nc" id="L97">    }</span>
+    
+    public Integer getAwayScore() {
+<span class="nc" id="L100">        return awayScore;</span>
+    }
+    
+    public void setAwayScore(Integer awayScore) {
+<span class="nc" id="L104">        this.awayScore = awayScore;</span>
+<span class="nc" id="L105">    }</span>
+    
+    public String getStatus() {
+<span class="nc" id="L108">        return status;</span>
+    }
+    
+    public void setStatus(String status) {
+<span class="nc" id="L112">        this.status = status;</span>
+<span class="nc" id="L113">    }</span>
+    
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L118" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="nc" id="L119">        Game game = (Game) o;</span>
+<span class="nc" id="L120">        return Objects.equals(gameId, game.gameId);</span>
+    }
+    
+    @Override
+    public int hashCode() {
+<span class="nc" id="L125">        return Objects.hash(gameId);</span>
+    }
+    
+    @Override
+    public String toString() {
+<span class="nc" id="L130">        return &quot;Game{&quot; +</span>
+                &quot;gameId='&quot; + gameId + '\'' +
+                &quot;, homeTeamId='&quot; + homeTeamId + '\'' +
+                &quot;, awayTeamId='&quot; + awayTeamId + '\'' +
+                &quot;, date=&quot; + date +
+                &quot;, homeScore=&quot; + homeScore +
+                &quot;, awayScore=&quot; + awayScore +
+                &quot;, status='&quot; + status + '\'' +
+                '}';
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

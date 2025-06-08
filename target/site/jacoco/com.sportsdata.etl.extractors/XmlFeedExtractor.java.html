@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XmlFeedExtractor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Sports Data ETL Pipeline</a> &gt; <a href="index.source.html" class="el_package">com.sportsdata.etl.extractors</a> &gt; <span class="el_source">XmlFeedExtractor.java</span></div><h1>XmlFeedExtractor.java</h1><pre class="source lang-java linenums">package com.sportsdata.etl.extractors;
+
+import com.sportsdata.etl.models.Game;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+<span class="nc" id="L25">public class XmlFeedExtractor {</span>
+    
+<span class="nc" id="L27">    private static final Logger logger = LoggerFactory.getLogger(XmlFeedExtractor.class);</span>
+<span class="nc" id="L28">    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+    
+    public List&lt;Game&gt; extractGames(String filePath) {
+<span class="nc" id="L31">        List&lt;Game&gt; games = new ArrayList&lt;&gt;();</span>
+        
+        try {
+<span class="nc" id="L34">            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span>
+<span class="nc" id="L35">            DocumentBuilder builder = factory.newDocumentBuilder();</span>
+<span class="nc" id="L36">            Document document = builder.parse(new File(filePath));</span>
+<span class="nc" id="L37">            document.getDocumentElement().normalize();</span>
+            
+<span class="nc" id="L39">            logger.info(&quot;Processing XML file: {}&quot;, filePath);</span>
+            
+<span class="nc" id="L41">            NodeList gameNodes = document.getElementsByTagName(&quot;game&quot;);</span>
+            
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            for (int i = 0; i &lt; gameNodes.getLength(); i++) {</span>
+<span class="nc" id="L44">                Node gameNode = gameNodes.item(i);</span>
+                
+<span class="nc bnc" id="L46" title="All 2 branches missed.">                if (gameNode.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="nc" id="L47">                    Element gameElement = (Element) gameNode;</span>
+<span class="nc" id="L48">                    Game game = parseGameElement(gameElement, i + 1);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">                    if (game != null) {</span>
+<span class="nc" id="L50">                        games.add(game);</span>
+                    }
+                }
+            }
+            
+<span class="nc" id="L55">            logger.info(&quot;Successfully extracted {} games from XML file: {}&quot;, games.size(), filePath);</span>
+            
+<span class="nc" id="L57">        } catch (ParserConfigurationException e) {</span>
+<span class="nc" id="L58">            logger.error(&quot;Parser configuration error for XML file: {}&quot;, filePath, e);</span>
+<span class="nc" id="L59">        } catch (SAXException e) {</span>
+<span class="nc" id="L60">            logger.error(&quot;SAX parsing error for XML file: {}&quot;, filePath, e);</span>
+<span class="nc" id="L61">        } catch (IOException e) {</span>
+<span class="nc" id="L62">            logger.error(&quot;IO error reading XML file: {}&quot;, filePath, e);</span>
+<span class="nc" id="L63">        } catch (Exception e) {</span>
+<span class="nc" id="L64">            logger.error(&quot;Unexpected error processing XML file: {}&quot;, filePath, e);</span>
+<span class="nc" id="L65">        }</span>
+        
+<span class="nc" id="L67">        return games;</span>
+    }
+    
+    private Game parseGameElement(Element gameElement, int gameNumber) {
+        try {
+<span class="nc" id="L72">            String gameId = getElementTextContent(gameElement, &quot;gameId&quot;);</span>
+<span class="nc" id="L73">            String homeTeamId = getElementTextContent(gameElement, &quot;homeTeamId&quot;);</span>
+<span class="nc" id="L74">            String awayTeamId = getElementTextContent(gameElement, &quot;awayTeamId&quot;);</span>
+<span class="nc" id="L75">            String dateStr = getElementTextContent(gameElement, &quot;date&quot;);</span>
+<span class="nc" id="L76">            String homeScoreStr = getElementTextContent(gameElement, &quot;homeScore&quot;);</span>
+<span class="nc" id="L77">            String awayScoreStr = getElementTextContent(gameElement, &quot;awayScore&quot;);</span>
+<span class="nc" id="L78">            String status = getElementTextContent(gameElement, &quot;status&quot;);</span>
+            
+            // Validate required fields
+<span class="nc bnc" id="L81" title="All 10 branches missed.">            if (gameId == null || homeTeamId == null || awayTeamId == null || </span>
+                dateStr == null || status == null) {
+<span class="nc" id="L83">                logger.warn(&quot;Missing required fields in game record {}: gameId={}, homeTeamId={}, awayTeamId={}, date={}, status={}&quot;, </span>
+<span class="nc" id="L84">                    gameNumber, gameId, homeTeamId, awayTeamId, dateStr, status);</span>
+<span class="nc" id="L85">                return null;</span>
+            }
+            
+            // Validate that home and away teams are different
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (homeTeamId.equals(awayTeamId)) {</span>
+<span class="nc" id="L90">                logger.warn(&quot;Game {} has same home and away team: {}&quot;, gameNumber, homeTeamId);</span>
+<span class="nc" id="L91">                return null;</span>
+            }
+            
+            // Parse date
+            LocalDateTime date;
+            try {
+<span class="nc" id="L97">                date = LocalDateTime.parse(dateStr, DATE_TIME_FORMATTER);</span>
+<span class="nc" id="L98">            } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L99">                logger.warn(&quot;Invalid date format in game {}: {}&quot;, gameNumber, dateStr);</span>
+<span class="nc" id="L100">                return null;</span>
+<span class="nc" id="L101">            }</span>
+            
+            // Parse scores (can be null for scheduled games)
+<span class="nc" id="L104">            Integer homeScore = null;</span>
+<span class="nc" id="L105">            Integer awayScore = null;</span>
+            
+<span class="nc bnc" id="L107" title="All 4 branches missed.">            if (homeScoreStr != null &amp;&amp; !homeScoreStr.trim().isEmpty()) {</span>
+                try {
+<span class="nc" id="L109">                    homeScore = Integer.parseInt(homeScoreStr.trim());</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">                    if (homeScore &lt; 0) {</span>
+<span class="nc" id="L111">                        logger.warn(&quot;Invalid home score in game {}: {}&quot;, gameNumber, homeScore);</span>
+<span class="nc" id="L112">                        return null;</span>
+                    }
+<span class="nc" id="L114">                } catch (NumberFormatException e) {</span>
+<span class="nc" id="L115">                    logger.warn(&quot;Invalid home score format in game {}: {}&quot;, gameNumber, homeScoreStr);</span>
+<span class="nc" id="L116">                    return null;</span>
+<span class="nc" id="L117">                }</span>
+            }
+            
+<span class="nc bnc" id="L120" title="All 4 branches missed.">            if (awayScoreStr != null &amp;&amp; !awayScoreStr.trim().isEmpty()) {</span>
+                try {
+<span class="nc" id="L122">                    awayScore = Integer.parseInt(awayScoreStr.trim());</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                    if (awayScore &lt; 0) {</span>
+<span class="nc" id="L124">                        logger.warn(&quot;Invalid away score in game {}: {}&quot;, gameNumber, awayScore);</span>
+<span class="nc" id="L125">                        return null;</span>
+                    }
+<span class="nc" id="L127">                } catch (NumberFormatException e) {</span>
+<span class="nc" id="L128">                    logger.warn(&quot;Invalid away score format in game {}: {}&quot;, gameNumber, awayScoreStr);</span>
+<span class="nc" id="L129">                    return null;</span>
+<span class="nc" id="L130">                }</span>
+            }
+            
+<span class="nc" id="L133">            return new Game(gameId, homeTeamId, awayTeamId, date, homeScore, awayScore, status);</span>
+            
+<span class="nc" id="L135">        } catch (Exception e) {</span>
+<span class="nc" id="L136">            logger.error(&quot;Error parsing game element {}: {}&quot;, gameNumber, e.getMessage());</span>
+<span class="nc" id="L137">            return null;</span>
+        }
+    }
+    
+    private String getElementTextContent(Element parent, String tagName) {
+<span class="nc" id="L142">        NodeList nodeList = parent.getElementsByTagName(tagName);</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (nodeList.getLength() &gt; 0) {</span>
+<span class="nc" id="L144">            String content = nodeList.item(0).getTextContent();</span>
+<span class="nc bnc" id="L145" title="All 4 branches missed.">            return content != null &amp;&amp; !content.trim().isEmpty() ? content.trim() : null;</span>
+        }
+<span class="nc" id="L147">        return null;</span>
+    }
+    
+    public boolean validateXmlStructure(String filePath) {
+        try {
+<span class="nc" id="L152">            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</span>
+<span class="nc" id="L153">            DocumentBuilder builder = factory.newDocumentBuilder();</span>
+<span class="nc" id="L154">            Document document = builder.parse(new File(filePath));</span>
+<span class="nc" id="L155">            document.getDocumentElement().normalize();</span>
+            
+            // Check if the document has game elements
+<span class="nc" id="L158">            NodeList gameNodes = document.getElementsByTagName(&quot;game&quot;);</span>
+            
+<span class="nc bnc" id="L160" title="All 2 branches missed.">            if (gameNodes.getLength() == 0) {</span>
+<span class="nc" id="L161">                logger.error(&quot;XML file has no game elements: {}&quot;, filePath);</span>
+<span class="nc" id="L162">                return false;</span>
+            }
+            
+            // Validate first game element structure
+<span class="nc" id="L166">            Node firstGame = gameNodes.item(0);</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            if (firstGame.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="nc" id="L168">                Element gameElement = (Element) firstGame;</span>
+                
+                // Check for required elements
+<span class="nc" id="L171">                String[] requiredElements = {&quot;gameId&quot;, &quot;homeTeamId&quot;, &quot;awayTeamId&quot;, &quot;date&quot;, &quot;status&quot;};</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">                for (String elementName : requiredElements) {</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">                    if (getElementTextContent(gameElement, elementName) == null) {</span>
+<span class="nc" id="L174">                        logger.error(&quot;XML game element missing required field: {}&quot;, elementName);</span>
+<span class="nc" id="L175">                        return false;</span>
+                    }
+                }
+            }
+            
+<span class="nc" id="L180">            return true;</span>
+            
+<span class="nc" id="L182">        } catch (ParserConfigurationException | SAXException | IOException e) {</span>
+<span class="nc" id="L183">            logger.error(&quot;Error validating XML file structure: {}&quot;, filePath, e);</span>
+<span class="nc" id="L184">            return false;</span>
+        }
+    }
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

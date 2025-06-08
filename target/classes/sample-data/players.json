@@ -1,0 +1,182 @@
+[
+    {
+        "playerId": "P001",
+        "name": "LeBron James",
+        "teamId": "LAL",
+        "position": "Small Forward",
+        "age": 39,
+        "statistics": {
+            "gamesPlayed": 71,
+            "points": 1714,
+            "assists": 654
+        }
+    },
+    {
+        "playerId": "P002",
+        "name": "Stephen Curry",
+        "teamId": "GSW",
+        "position": "Point Guard",
+        "age": 35,
+        "statistics": {
+            "gamesPlayed": 74,
+            "points": 2168,
+            "assists": 515
+        }
+    },
+    {
+        "playerId": "P003",
+        "name": "Jayson Tatum",
+        "teamId": "BOS",
+        "position": "Small Forward",
+        "age": 25,
+        "statistics": {
+            "gamesPlayed": 74,
+            "points": 2046,
+            "assists": 340
+        }
+    },
+    {
+        "playerId": "P004",
+        "name": "Jimmy Butler",
+        "teamId": "MIA",
+        "position": "SG",
+        "age": 34,
+        "statistics": {
+            "gamesPlayed": 60,
+            "points": 1242,
+            "assists": 312
+        }
+    },
+    {
+        "playerId": "P005",
+        "name": "DeMar DeRozan",
+        "teamId": "CHI",
+        "position": "SG",
+        "age": 34,
+        "statistics": {
+            "gamesPlayed": 79,
+            "points": 1963,
+            "assists": 395
+        }
+    },
+    {
+        "playerId": "P006",
+        "name": "Jalen Brunson",
+        "teamId": "NYK",
+        "position": "PG",
+        "age": 27,
+        "statistics": {
+            "gamesPlayed": 77,
+            "points": 2370,
+            "assists": 515
+        }
+    },
+    {
+        "playerId": "P007",
+        "name": "Devin Booker",
+        "teamId": "PHX",
+        "position": "Shooting Guard",
+        "age": 27,
+        "statistics": {
+            "gamesPlayed": 68,
+            "points": 2127,
+            "assists": 456
+        }
+    },
+    {
+        "playerId": "P008",
+        "name": "Giannis Antetokounmpo",
+        "teamId": "MIL",
+        "position": "PF",
+        "age": 29,
+        "statistics": {
+            "gamesPlayed": 73,
+            "points": 2234,
+            "assists": 438
+        }
+    },
+    {
+        "playerId": "P009",
+        "name": "Joel Embiid",
+        "teamId": "PHI",
+        "position": "Center",
+        "age": 30,
+        "statistics": {
+            "gamesPlayed": 39,
+            "points": 1313,
+            "assists": 214
+        }
+    },
+    {
+        "playerId": "P010",
+        "name": "Mikal Bridges",
+        "teamId": "BKN",
+        "position": "SF",
+        "age": 27,
+        "statistics": {
+            "gamesPlayed": 82,
+            "points": 1669,
+            "assists": 295
+        }
+    },
+    {
+        "playerId": "P011",
+        "name": "Nikola Jokic",
+        "teamId": "DEN",
+        "position": "C",
+        "age": 29,
+        "statistics": {
+            "gamesPlayed": 79,
+            "points": 2147,
+            "assists": 758
+        }
+    },
+    {
+        "playerId": "P012",
+        "name": "Luka Doncic",
+        "teamId": "DAL",
+        "position": "Point Guard",
+        "age": 25,
+        "statistics": {
+            "gamesPlayed": 70,
+            "points": 2370,
+            "assists": 665
+        }
+    },
+    {
+        "playerId": "P013",
+        "name": "RJ Davis",
+        "teamId": "UNC",
+        "position": "Guard",
+        "age": 22,
+        "statistics": {
+            "gamesPlayed": 39,
+            "points": 825,
+            "assists": 156
+        }
+    },
+    {
+        "playerId": "P014",
+        "name": "Kyle Filipowski",
+        "teamId": "DUKE",
+        "position": "Forward",
+        "age": 20,
+        "statistics": {
+            "gamesPlayed": 37,
+            "points": 592,
+            "assists": 89
+        }
+    },
+    {
+        "playerId": "P015",
+        "name": "Antonio Reeves",
+        "teamId": "UK",
+        "position": "Guard",
+        "age": 23,
+        "statistics": {
+            "gamesPlayed": 34,
+            "points": 680,
+            "assists": 102
+        }
+    }
+]
