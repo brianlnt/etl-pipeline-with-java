@@ -55,7 +55,6 @@ public class Game {
         this.status = status;
     }
     
-    // Getters and Setters
     public String getGameId() {
         return gameId;
     }

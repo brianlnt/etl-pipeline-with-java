@@ -49,7 +49,6 @@ public class Player {
         this.statistics = statistics != null ? statistics : new PlayerStatistics();
     }
     
-    // Getters and Setters
     public String getPlayerId() {
         return playerId;
     }
@@ -138,7 +137,6 @@ public class Player {
         @Column(name = "assists")
         private Integer assists = 0;
         
-        // Constructors
         public PlayerStatistics() {}
         
         public PlayerStatistics(Integer gamesPlayed, Integer points, Integer assists) {
@@ -147,7 +145,6 @@ public class Player {
             this.assists = assists;
         }
         
-        // Getters and Setters
         public Integer getGamesPlayed() {
             return gamesPlayed;
         }

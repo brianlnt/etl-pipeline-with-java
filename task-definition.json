@@ -1,0 +1,38 @@
+{
+  "family": "sports-etl-pipeline",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::183295414469:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "sports-etl-pipeline",
+      "image": "183295414469.dkr.ecr.us-east-1.amazonaws.com/sports-etl-pipeline:latest",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_PROFILES_ACTIVE",
+          "value": "default"
+        },
+        {
+          "name": "ETL_MODE",
+          "value": "NORMAL"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/sports-etl-pipeline",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
