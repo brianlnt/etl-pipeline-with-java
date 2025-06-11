@@ -70,6 +70,7 @@ create_task_definition() {
   "cpu": "512",
   "memory": "1024",
   "executionRoleArn": "arn:aws:iam::$AWS_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::$AWS_ACCOUNT_ID:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "$PROJECT_NAME",
@@ -83,7 +84,19 @@ create_task_definition() {
       "environment": [
         {
           "name": "ETL_MODE",
-          "value": "NORMAL"
+          "value": "SCHEDULED"
+        },
+        {
+          "name": "AWS_S3_BUCKET_NAME",
+          "value": "sports-data-etl-bucket"
+        },
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-1"
+        },
+        {
+          "name": "S3_KEY_PREFIX",
+          "value": "sports-data"
         }
       ],
       "logConfiguration": {

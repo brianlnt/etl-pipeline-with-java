@@ -1,10 +1,13 @@
 {
   "family": "sports-etl-pipeline",
   "networkMode": "awsvpc",
-  "requiresCompatibilities": ["FARGATE"],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
   "cpu": "512",
   "memory": "1024",
   "executionRoleArn": "arn:aws:iam::183295414469:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::183295414469:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "sports-etl-pipeline",
@@ -17,12 +20,20 @@
       ],
       "environment": [
         {
-          "name": "SPRING_PROFILES_ACTIVE",
-          "value": "default"
+          "name": "ETL_MODE",
+          "value": "SCHEDULED"
         },
         {
-          "name": "ETL_MODE",
-          "value": "NORMAL"
+          "name": "AWS_S3_BUCKET_NAME",
+          "value": "sports-data-etl-bucket"
+        },
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-1"
+        },
+        {
+          "name": "S3_KEY_PREFIX",
+          "value": "sports-data"
         }
       ],
       "logConfiguration": {
