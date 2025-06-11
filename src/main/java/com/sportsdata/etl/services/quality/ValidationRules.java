@@ -1,4 +1,4 @@
-package com.sportsdata.etl.quality;
+package com.sportsdata.etl.services.quality;
 
 import com.sportsdata.etl.models.Game;
 import com.sportsdata.etl.models.Player;

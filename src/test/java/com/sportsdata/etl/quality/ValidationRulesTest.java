@@ -3,6 +3,8 @@ package com.sportsdata.etl.quality;
 import com.sportsdata.etl.models.Game;
 import com.sportsdata.etl.models.Player;
 import com.sportsdata.etl.models.Team;
+import com.sportsdata.etl.services.quality.ValidationRules;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

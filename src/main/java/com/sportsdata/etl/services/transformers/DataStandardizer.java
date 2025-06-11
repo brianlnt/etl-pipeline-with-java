@@ -1,4 +1,4 @@
-package com.sportsdata.etl.transformers;
+package com.sportsdata.etl.services.transformers;
 
 import com.sportsdata.etl.models.Game;
 import com.sportsdata.etl.models.Player;

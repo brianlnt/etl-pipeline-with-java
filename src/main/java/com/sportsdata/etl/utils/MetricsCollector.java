@@ -1,6 +1,5 @@
 package com.sportsdata.etl.utils;
 
-import com.sportsdata.etl.pipeline.EtlPipeline;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
@@ -8,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.sportsdata.etl.services.pipeline.EtlPipeline;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

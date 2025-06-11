@@ -1,9 +1,10 @@
 package com.sportsdata.etl.controllers;
 
-import com.sportsdata.etl.loaders.DatabaseLoader;
-import com.sportsdata.etl.pipeline.EtlPipeline;
-import com.sportsdata.etl.quality.DataQualityChecker;
-import com.sportsdata.etl.quality.QualityReport;
+import com.sportsdata.etl.services.loaders.DatabaseLoader;
+import com.sportsdata.etl.services.pipeline.EtlPipeline;
+import com.sportsdata.etl.services.quality.DataQualityChecker;
+import com.sportsdata.etl.services.quality.QualityReport;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

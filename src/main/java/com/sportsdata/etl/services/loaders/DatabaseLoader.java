@@ -1,12 +1,13 @@
-package com.sportsdata.etl.loaders;
+package com.sportsdata.etl.services.loaders;
 
 import com.sportsdata.etl.models.Game;
 import com.sportsdata.etl.models.Player;
 import com.sportsdata.etl.models.Team;
-import com.sportsdata.etl.pipeline.EtlPipeline;
 import com.sportsdata.etl.repositories.GameRepository;
 import com.sportsdata.etl.repositories.PlayerRepository;
 import com.sportsdata.etl.repositories.TeamRepository;
+import com.sportsdata.etl.services.pipeline.EtlPipeline;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

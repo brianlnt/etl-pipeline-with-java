@@ -1,6 +1,8 @@
 package com.sportsdata.etl.extractors;
 
 import com.sportsdata.etl.models.Team;
+import com.sportsdata.etl.services.extractors.CsvDataExtractor;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;

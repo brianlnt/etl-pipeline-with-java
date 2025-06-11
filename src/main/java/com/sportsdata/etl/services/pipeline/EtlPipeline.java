@@ -1,17 +1,17 @@
-package com.sportsdata.etl.pipeline;
+package com.sportsdata.etl.services.pipeline;
 
-import com.sportsdata.etl.extractors.CsvDataExtractor;
-import com.sportsdata.etl.extractors.JsonApiExtractor;
-import com.sportsdata.etl.extractors.XmlFeedExtractor;
-import com.sportsdata.etl.loaders.DatabaseLoader;
 import com.sportsdata.etl.models.Game;
 import com.sportsdata.etl.models.Player;
 import com.sportsdata.etl.models.Team;
-import com.sportsdata.etl.quality.DataQualityChecker;
-import com.sportsdata.etl.quality.QualityReport;
-import com.sportsdata.etl.transformers.DataCleaner;
-import com.sportsdata.etl.transformers.DataStandardizer;
-import com.sportsdata.etl.transformers.DataValidator;
+import com.sportsdata.etl.services.extractors.CsvDataExtractor;
+import com.sportsdata.etl.services.extractors.JsonApiExtractor;
+import com.sportsdata.etl.services.extractors.XmlFeedExtractor;
+import com.sportsdata.etl.services.loaders.DatabaseLoader;
+import com.sportsdata.etl.services.quality.DataQualityChecker;
+import com.sportsdata.etl.services.quality.QualityReport;
+import com.sportsdata.etl.services.transformers.DataCleaner;
+import com.sportsdata.etl.services.transformers.DataStandardizer;
+import com.sportsdata.etl.services.transformers.DataValidator;
 import com.sportsdata.etl.utils.MetricsCollector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

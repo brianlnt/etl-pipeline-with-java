@@ -1,9 +1,10 @@
-package com.sportsdata.etl.transformers;
+package com.sportsdata.etl.services.transformers;
 
 import com.sportsdata.etl.models.Game;
 import com.sportsdata.etl.models.Player;
 import com.sportsdata.etl.models.Team;
-import com.sportsdata.etl.quality.ValidationRules;
+import com.sportsdata.etl.services.quality.ValidationRules;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

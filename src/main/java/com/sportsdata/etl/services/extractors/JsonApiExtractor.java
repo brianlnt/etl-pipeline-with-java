@@ -1,4 +1,4 @@
-package com.sportsdata.etl.extractors;
+package com.sportsdata.etl.services.extractors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

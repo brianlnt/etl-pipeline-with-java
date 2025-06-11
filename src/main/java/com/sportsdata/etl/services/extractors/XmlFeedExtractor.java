@@ -1,4 +1,4 @@
-package com.sportsdata.etl.extractors;
+package com.sportsdata.etl.services.extractors;
 
 import com.sportsdata.etl.models.Game;
 import org.slf4j.Logger;

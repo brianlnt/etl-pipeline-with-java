@@ -1,4 +1,4 @@
-package com.sportsdata.etl.quality;
+package com.sportsdata.etl.services.quality;
 
 import java.time.LocalDateTime;
 import java.util.Map;
