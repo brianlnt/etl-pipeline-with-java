@@ -6,8 +6,8 @@ import com.sportsdata.etl.models.Team;
 import com.sportsdata.etl.services.extractors.CsvDataExtractor;
 import com.sportsdata.etl.services.extractors.JsonApiExtractor;
 import com.sportsdata.etl.services.extractors.XmlFeedExtractor;
-import com.sportsdata.etl.services.loaders.DatabaseLoader;
-import com.sportsdata.etl.services.quality.DataQualityChecker;
+import com.sportsdata.etl.services.loaders.S3DataLoader;
+import com.sportsdata.etl.services.quality.S3QualityChecker;
 import com.sportsdata.etl.services.quality.QualityReport;
 import com.sportsdata.etl.services.transformers.DataCleaner;
 import com.sportsdata.etl.services.transformers.DataStandardizer;
@@ -46,10 +46,10 @@ public class EtlPipeline {
     private DataStandardizer dataStandardizer;
     
     @Autowired
-    private DatabaseLoader databaseLoader;
+    private S3DataLoader s3DataLoader;
     
     @Autowired
-    private DataQualityChecker qualityChecker;
+    private S3QualityChecker qualityChecker;
     
     @Autowired
     private MetricsCollector metricsCollector;
@@ -184,7 +184,7 @@ public class EtlPipeline {
     }
     
     private LoadResult loadData(TransformedData transformedData) {
-        return databaseLoader.loadAllData(transformedData);
+        return s3DataLoader.loadAllData(transformedData);
     }
     
     // Data Transfer Objects

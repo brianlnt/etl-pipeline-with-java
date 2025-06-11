@@ -1,6 +1,5 @@
 package com.sportsdata.etl.models;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -8,37 +7,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
-@Table(name = "games")
 public class Game {
     
-    @Id
-    @Column(name = "game_id")
     private String gameId;
     
     @NotBlank
-    @Column(name = "home_team_id", nullable = false)
     private String homeTeamId;
     
     @NotBlank
-    @Column(name = "away_team_id", nullable = false)
     private String awayTeamId;
     
     @NotNull
-    @Column(name = "date", nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
     
     @PositiveOrZero
-    @Column(name = "home_score")
     private Integer homeScore;
     
     @PositiveOrZero
-    @Column(name = "away_score")
     private Integer awayScore;
     
     @NotBlank
-    @Column(name = "status", nullable = false)
     private String status;
     
     // Constructors

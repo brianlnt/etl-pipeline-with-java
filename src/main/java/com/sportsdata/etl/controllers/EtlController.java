@@ -1,8 +1,8 @@
 package com.sportsdata.etl.controllers;
 
-import com.sportsdata.etl.services.loaders.DatabaseLoader;
+import com.sportsdata.etl.services.loaders.S3DataLoader;
 import com.sportsdata.etl.services.pipeline.EtlPipeline;
-import com.sportsdata.etl.services.quality.DataQualityChecker;
+import com.sportsdata.etl.services.quality.S3QualityChecker;
 import com.sportsdata.etl.services.quality.QualityReport;
 
 import org.slf4j.Logger;
@@ -25,10 +25,10 @@ public class EtlController {
     private EtlPipeline etlPipeline;
     
     @Autowired
-    private DataQualityChecker qualityChecker;
+    private S3QualityChecker qualityChecker;
     
     @Autowired
-    private DatabaseLoader databaseLoader;
+    private S3DataLoader s3DataLoader;
     
     @PostMapping("/execute")
     public ResponseEntity<EtlPipeline.PipelineResult> executePipeline(
@@ -88,17 +88,19 @@ public class EtlController {
         try {
             Map<String, Object> status = new HashMap<>();
             
-            // Get data counts
-            long teamCount = databaseLoader.getTeamCount();
-            long playerCount = databaseLoader.getPlayerCount();
-            long gameCount = databaseLoader.getGameCount();
+            // Check S3 connection
+            boolean s3Connected = s3DataLoader.checkS3Connection();
+            QualityReport report = qualityChecker.generateQualityReport();
             
-            status.put("status", "READY");
-            status.put("database", Map.of(
-                "teams", teamCount,
-                "players", playerCount,
-                "games", gameCount,
-                "total", teamCount + playerCount + gameCount
+            status.put("status", s3Connected ? "READY" : "S3_CONNECTION_ERROR");
+            status.put("s3Storage", Map.of(
+                "connected", s3Connected,
+                "teams", report.getTeamCount(),
+                "players", report.getPlayerCount(),
+                "games", report.getGameCount(),
+                "total", report.getTeamCount() + report.getPlayerCount() + report.getGameCount(),
+                "qualityScore", report.getOverallQualityScore(),
+                "qualityStatus", report.getQualityStatus()
             ));
             
             // Add system info
@@ -118,25 +120,13 @@ public class EtlController {
     
     @DeleteMapping("/data")
     public ResponseEntity<Map<String, String>> clearAllData() {
-        logger.warn("Data clearing requested via REST API");
+        logger.warn("Data clearing requested via REST API - Note: S3 data cannot be cleared via this endpoint");
         
-        try {
-            databaseLoader.clearAllData();
-            
-            Map<String, String> response = new HashMap<>();
-            response.put("status", "SUCCESS");
-            response.put("message", "All data cleared from database");
-            
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            logger.error("Error clearing data", e);
-            
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("status", "ERROR");
-            errorResponse.put("message", e.getMessage());
-            
-            return ResponseEntity.internalServerError().body(errorResponse);
-        }
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "INFO");
+        response.put("message", "S3 data storage does not support clearing data via API. Please manage S3 objects directly through AWS console or CLI.");
+        
+        return ResponseEntity.ok(response);
     }
     
     @GetMapping("/health")

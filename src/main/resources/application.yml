@@ -1,26 +1,6 @@
 spring:
   application:
     name: sports-data-etl-pipeline
-  
-  datasource:
-    url: jdbc:h2:mem:sportsdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: password
-    
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        format_sql: true
         
   jackson:
     serialization:
@@ -69,6 +49,12 @@ etl:
     players-json: "src/main/resources/sample-data/players.json"
     games-xml: "src/main/resources/sample-data/games.xml"
     
+  # S3 Configuration
+  s3:
+    bucket-name: ${AWS_S3_BUCKET_NAME:sports-data-etl-bucket}
+    region: ${AWS_REGION:us-east-1}
+    prefix: ${S3_KEY_PREFIX:sports-data}
+    
   quality:
     minimum-score: 0.7
     fail-on-poor-quality: false
@@ -90,22 +76,16 @@ spring:
     activate:
       on-profile: production
       
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME:sportsuser}
-    password: ${DB_PASSWORD:sportspass}
-    
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: false
+etl:
+  s3:
+    bucket-name: ${AWS_S3_BUCKET_NAME:sports-data-etl-prod}
+    region: ${AWS_REGION:us-east-1}
+    prefix: ${S3_KEY_PREFIX:sports-data-prod}
     
 logging:
   level:
     com.sportsdata.etl: INFO
     org.springframework: WARN
-    org.hibernate.SQL: WARN
     
 ---
 # Test Profile
@@ -114,12 +94,11 @@ spring:
     activate:
       on-profile: test
       
-  datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
+etl:
+  s3:
+    bucket-name: ${AWS_S3_BUCKET_NAME:sports-data-etl-test}
+    region: ${AWS_REGION:us-east-1}
+    prefix: ${S3_KEY_PREFIX:sports-data-test}
       
 logging:
   level:

@@ -1,38 +1,28 @@
 package com.sportsdata.etl.models;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Objects;
 
-@Entity
-@Table(name = "players")
 public class Player {
     
-    @Id
-    @Column(name = "player_id")
     private String playerId;
     
     @NotBlank
-    @Column(name = "name", nullable = false)
     private String name;
     
     @NotBlank
-    @Column(name = "team_id", nullable = false)
     private String teamId;
     
     @NotBlank
-    @Column(name = "position", nullable = false)
     private String position;
     
     @NotNull
     @Positive
-    @Column(name = "age", nullable = false)
     private Integer age;
     
-    @Embedded
     private PlayerStatistics statistics;
     
     // Constructors
@@ -122,19 +112,15 @@ public class Player {
                 '}';
     }
     
-    @Embeddable
     public static class PlayerStatistics {
         
         @PositiveOrZero
-        @Column(name = "games_played")
         private Integer gamesPlayed = 0;
         
         @PositiveOrZero
-        @Column(name = "points")
         private Integer points = 0;
         
         @PositiveOrZero
-        @Column(name = "assists")
         private Integer assists = 0;
         
         public PlayerStatistics() {}

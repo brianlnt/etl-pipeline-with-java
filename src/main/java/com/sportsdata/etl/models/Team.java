@@ -1,6 +1,5 @@
 package com.sportsdata.etl.models;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -8,33 +7,24 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name = "teams")
 public class Team {
     
-    @Id
-    @Column(name = "team_id")
     private String teamId;
     
     @NotBlank
-    @Column(name = "name", nullable = false)
     private String name;
     
     @NotBlank
-    @Column(name = "city", nullable = false)
     private String city;
     
     @NotBlank
-    @Column(name = "league", nullable = false)
     private String league;
     
     @NotNull
     @PastOrPresent
-    @Column(name = "founded")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate founded;
     
-    @Column(name = "venue")
     private String venue;
     
     // Constructors
