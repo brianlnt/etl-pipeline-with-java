@@ -50,7 +50,7 @@ public class ScheduledETLRunner implements ApplicationRunner {
                     }
                     
                     logger.info("Scheduled ETL run completed");
-                    System.exit(0);
+                    // System.exit(0);
                 } else {
                     logger.error("ETL pipeline failed: {}", result.getErrorMessage());
                     System.exit(1);
