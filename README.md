@@ -6,23 +6,70 @@ A comprehensive Extract, Transform, Load (ETL) pipeline for processing sports da
 
 The ETL pipeline follows a modular architecture with clear separation of concerns:
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   EXTRACTION    │    │ TRANSFORMATION  │    │    LOADING      │
-│                 │    │                 │    │                 │
-│ • CSV Extractor │───▶│ • Data Validator│───▶│ • Database      │
-│ • JSON Extractor│    │ • Data Cleaner  │    │   Loader        │
-│ • XML Extractor │    │ • Data Standard │    │ • Batch Insert  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                                ▼
-                       ┌─────────────────┐
-                       │ QUALITY CONTROL │
-                       │                 │
-                       │ • Validation    │
-                       │ • Quality Report│
-                       │ • Metrics       │
-                       └─────────────────┘
+```mermaid
+---
+config:
+  layout: dagre
+---
+flowchart TB
+ subgraph subGraph0["AWS Cloud"]
+        ECS["ECS Container"]
+        ECR["ECR Repository"]
+        S3["S3 Bucket"]
+        EventBridge["EventBridge"]
+        Lambda["Lambda Function"]
+  end
+ subgraph subGraph1["ETL Pipeline Application"]
+        API["REST API Layer"]
+        Pipeline["ETL Pipeline Core"]
+        Extractors["Extractors"]
+        Transformers["Transformers"]
+        Loaders["Loaders"]
+        Quality["Quality Checkers"]
+        Metrics["Metrics Collector"]
+  end
+ subgraph subGraph2["Data Sources"]
+        CSV["CSV Files"]
+        JSON["JSON Files"]
+        XML["XML Files"]
+  end
+ subgraph subGraph3["Monitoring & Logging"]
+        Logs["Application Logs"]
+        CloudWatch["CloudWatch Logs"]
+  end
+    CSV --> Extractors
+    JSON --> Extractors
+    XML --> Extractors
+    API --> Pipeline
+    Pipeline --> Extractors & Metrics & Logs
+    Extractors --> Transformers
+    Transformers --> Loaders
+    Loaders --> Quality
+    Quality --> S3
+    Lambda --> CloudWatch & ECS
+    ECS --> ECR & S3
+    EventBridge --> Lambda
+     ECS:::aws
+     ECR:::aws
+     S3:::aws
+     EventBridge:::aws
+     Lambda:::aws
+     API:::app
+     Pipeline:::app
+     Extractors:::app
+     Transformers:::app
+     Loaders:::app
+     Quality:::app
+     Metrics:::app
+     CSV:::data
+     JSON:::data
+     XML:::data
+     Logs:::monitoring
+     CloudWatch:::monitoring
+    classDef aws fill:#FF9900,stroke:#232F3E,stroke-width:2px,color:white
+    classDef app fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white
+    classDef data fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:white
+    classDef monitoring fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:white
 ```
 
 ## 🚀 Features
@@ -239,21 +286,16 @@ GSW,Golden State Warriors,San Francisco,NBA,1946-01-01,Chase Center
     <status>Final</status>
   </game>
 </games>
-```
-
-## 🧪 Testing
+```## 🧪 Testing
 
 ### Run All Tests
 ```bash
 mvn test
-```
-
-### Run Specific Test Classes
+```### Run Specific Test Classes
 ```bash
 mvn test -Dtest=CsvDataExtractorTest
 mvn test -Dtest=ValidationRulesTest
 ```
-
 ### Test Coverage
 ```bash
 mvn jacoco:report
@@ -336,3 +378,7 @@ For support and questions:
 - **Web UI**: React-based dashboard for pipeline management
 - **Multi-tenant Support**: Support for multiple organizations
 - **Cloud Integration**: AWS/Azure/GCP deployment templates 
+
+
+
+
